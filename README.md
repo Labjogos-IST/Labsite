@@ -1,3 +1,11 @@
+# For downloading
+`git clone --recursive git@github.com:Labjogos-IST/Labsite.git`
+
+setup/install:
+- hugo 
+- pnpm
+- nodejs/npm?
+
 # Editing Notes:
 - Create new content with the command "hugo new content <SECTIONNAME>/<FILENAME>.<FORMAT>".
 
