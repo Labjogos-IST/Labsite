@@ -1,0 +1,228 @@
+{{ define "main" }}
+
+<section class="recent-content bg-zinc-50 dark:bg-zinc-900 py-12 border-b border-zinc-200 dark:border-zinc-800">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="mb-6">
+      <h2 class="font-heading text-xs font-bold uppercase tracking-widest text-primary-600 dark:text-primary-400 mb-1">
+        Updates
+      </h2>
+      <p class="font-heading text-2xl font-bold text-zinc-900 dark:text-white">
+        Find out our recent news
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {{ range first 3 (where .Site.RegularPages "Section" "in" (slice "projects" "news" "blog")) }}
+      <article class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 shadow-sm hover:shadow transition">
+        <div class="space-y-2">
+          <span class="text-xs font-semibold uppercase text-zinc-400 tracking-wider">
+            {{ .Section }}
+          </span>
+          <h3 class="font-heading font-bold text-lg text-zinc-900 dark:text-white">
+            <a href="{{ .RelPermalink }}" class="hover:underline">
+              {{ .Title }}
+            </a>
+          </h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400">
+            {{ .Summary | plainify }}
+          </p>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="about-us py-16 bg-white dark:bg-zinc-950">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="font-heading text-3xl font-black text-zinc-900 dark:text-white">
+        About Us
+      </h2>
+      <p class="text-zinc-600 dark:text-zinc-400 mt-2">
+        {{ .Site.Params.moto }}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {{ range .Site.Params.sections.about.cards }}
+      {{ $w := split .style " " }}
+      <div class="aspect-square {{ index $w 0 }} {{ index $w 1 }} p-8 rounded shadow-md flex flex-col justify-between hover:scale-[1.02] transition">
+        <div class="text-3xl font-black {{ index $w 2 }}">
+          {{ .number }}
+        </div>
+        <p class="text-sm leading-relaxed {{ index $w 3 }}">
+          {{ .text }}
+        </p>
+        <div class="uppercase tracking-widest text-xs font-bold {{ index $w 4 }}">
+          {{ .title }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="education py-16 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="mb-10">
+      <h2 class="font-heading text-2xl font-bold text-zinc-900 dark:text-white">
+        Education
+      </h2>
+      <p class="text-zinc-600 dark:text-zinc-400 text-sm">
+        Courses and subjects structured around the Game Development track at Técnico.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {{ range .Site.Params.sections.education.items }}
+      <div class="p-6 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+        <h3 class="font-heading font-bold text-zinc-900 dark:text-white">
+          {{ .title }}
+        </h3>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+          {{ .desc }}
+        </p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="index-games py-16 bg-white dark:bg-zinc-950 overflow-hidden" id="index-games" style="display: block !important; width: 100% !important;">
+  <div class="container mx-auto px-4 max-w-7xl">
+    
+    <div class="flex items-center justify-between mb-8 border-b border-zinc-100 dark:border-zinc-800/50 pb-4">
+      <h2 class="font-heading text-3xl font-black tracking-tight text-zinc-900 dark:text-white uppercase">Games</h2>
+      <div class="flex items-center gap-2">
+        <a href="{{ .Site.Params.sections.games.see_more_url | default "/en/projects/" }}" class="px-4 py-1.5 text-xs font-bold tracking-wider uppercase bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded transition">See More</a>
+      </div>
+    </div>
+    
+    <div 
+      class="game-container scroll-smooth" 
+      style="display: block !important; width: 100% !important; overflow-x: auto !important; overflow-y: hidden !important; white-space: nowrap !important; padding-bottom: 1.5rem; -webkit-overflow-scrolling: touch;">
+      
+      <div style="display: inline-block !important; width: 8px !important;"></div>
+
+      {{ range .Site.Params.sections.games.highlights_before }}
+        {{ template "labjogos-game-card" (dict "context" . "isPage" false "site" $.Site) }}
+      {{ end }}
+
+      {{ range (where .Site.RegularPages "Section" "projects") }}
+        {{ template "labjogos-game-card" (dict "context" . "isPage" true "site" $.Site) }}
+      {{ end }}
+
+      {{ range .Site.Params.sections.games.highlights_after }}
+        {{ template "labjogos-game-card" (dict "context" . "isPage" false "site" $.Site) }}
+      {{ end }}
+
+      <div style="display: inline-block !important; width: 8px !important;"></div>
+
+    </div>
+  </div>
+</section>
+
+<section class="events py-16 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800">
+  <div class="container mx-auto px-4 max-w-7xl">
+    <div class="mb-10">
+      <h2 class="font-heading text-2xl font-bold text-zinc-900 dark:text-white">
+        Events
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {{ range .Site.Params.sections.events.items }}
+      <div class="flex gap-4 p-6 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+        <div class="p-3 {{ .badge_style }} font-bold text-sm rounded">
+          {{ .badge }}
+        </div>
+        <div>
+          <h3 class="font-bold text-zinc-900 dark:text-white">
+            {{ .title }}
+          </h3>
+          <p class="text-sm text-zinc-500 mt-1">
+            {{ .desc }}
+          </p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ end }}
+
+
+{{ define "labjogos-game-card" }}
+  {{ $item := .context }}
+  {{ $site := .site }}
+  
+  {{/* Dynamic Value Assignment */}}
+  {{ $title := "" }}{{ $desc := "" }}{{ $link := "" }}{{ $img := "" }}{{ $year := "" }}{{ $tags := slice }}
+  
+  {{ if .isPage }}
+    {{ $title = $item.Title }}
+    {{ $desc = $item.Summary | plainify }}
+    {{ $link = $item.RelPermalink }}
+    {{ $img = $item.Params.image }}
+    {{ $year = $item.Params.year }}
+    {{ $tags = $item.Params.tags }}
+  {{ else }}
+    {{ $title = $item.title }}
+    {{ $desc = $item.desc }}
+    {{ $link = $item.link }}
+    {{ $img = $item.image }}
+    {{ $year = $item.year }}
+    {{ $tags = $item.tags }}
+  {{ end }}
+
+  <div 
+    class="item-a group relative bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md"
+    style="display: inline-block !important; width: 340px !important; margin-right: 1.5rem !important; vertical-align: top !important; white-space: normal !important; float: none !important;">
+    
+    <a href="{{ $link | default "#" }}" class="block p-4">
+      
+      <div class="img-container aspect-video w-full bg-zinc-800 rounded mb-4 overflow-hidden relative border border-zinc-200/40 dark:border-zinc-700/30 flex items-center justify-center">
+        {{ if $img }}
+          <img src="{{ $img | relURL }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="{{ $title }}">
+        {{ else }}
+          <span class="text-zinc-400 font-heading text-sm font-bold uppercase tracking-wider px-4 text-center whitespace-normal">{{ $item.placeholder | default $title }}</span>
+        {{ end }}
+      </div>
+      
+      <div class="info-container flex flex-col justify-between min-h-[160px]">
+        <div>
+          <h3 class="font-heading font-bold text-lg text-zinc-900 dark:text-white tracking-tight leading-snug mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            {{ $title }}
+          </h3>
+          
+          {{ if or $year $tags }}
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            {{ if $year }}
+              <span class="inline-block px-2 py-0.5 text-[10px] font-bold tracking-wider bg-primary-600 text-white rounded uppercase">{{ $year }}</span>
+            {{ end }}
+            {{ range $tags }}
+              <span class="inline-block px-2 py-0.5 text-[10px] font-medium bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded lowercase">#{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+          
+          <div class="text line-clamp-3 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 mb-4">
+            <p>{{ $desc }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
+          <span class="text-[11px] font-bold tracking-widest uppercase text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-colors">
+            {{ if $link }}View Details{{ else }}Prototype Stage{{ end }}
+          </span>
+          <div class="more-arrow-box w-6 h-6 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 group-hover:bg-primary-600 group-hover:text-white transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7 7M21 12H3" />
+            </svg>
+          </div>
+        </div>
+        
+      </div>
+    </a>
+    
+    <div class="stripe-bottom-right absolute bottom-0 right-0 w-2 h-2 bg-primary-600 opacity-0 group-hover:opacity-100 transition-opacity rounded-tl"></div>
+  </div>
+{{ end }}

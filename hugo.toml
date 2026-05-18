@@ -6,24 +6,23 @@ defaultContentLanguageInSubdir = true
 contentDir = "content"
 
 [languages]
+[languages.en]
+languageName = "English"
+languageCode = "en-GB"
+contentDir = "content/en"
+weight = 1
 
-  [languages.en]
-    languageName = "English"
-    languageCode = "en-US"
-    contentDir = "content/en"
-    weight = 1
-
-  [languages.pt]
-    languageName = "Português"
-    languageCode = "pt-PT"
-    contentDir = "content/pt"
-    weight = 2
+[languages.pt]
+languageName = "Português"
+languageCode = "pt-PT"
+contentDir = "content/pt"
+weight = 2
 
 enableEmoji = true
 enableGitInfo = false
 enableRobotsTXT = true
 canonifyURLs = false
-darkmode_js = [ "assets/js/darkmode.js" ]
+darkmode_js = ["assets/js/darkmode.js"]
 enableInlineShortcodes = true
 
 [pagination]
@@ -38,27 +37,27 @@ strikethrough = true
 table = true
 taskList = true
 
-  [markup.goldmark.extensions.typographer]
-  apostrophe = "&rsquo;"
-  disable = false
-  ellipsis = "&hellip;"
-  emDash = "&mdash;"
-  enDash = "&ndash;"
-  leftAngleQuote = "&laquo;"
-  leftDoubleQuote = "&ldquo;"
-  leftSingleQuote = "&lsquo;"
-  rightAngleQuote = "&raquo;"
-  rightDoubleQuote = "&rdquo;"
-  rightSingleQuote = "&rsquo;"
+[markup.goldmark.extensions.typographer]
+apostrophe = "&rsquo;"
+disable = false
+ellipsis = "&hellip;"
+emDash = "&mdash;"
+enDash = "&ndash;"
+leftAngleQuote = "&laquo;"
+leftDoubleQuote = "&ldquo;"
+leftSingleQuote = "&lsquo;"
+rightAngleQuote = "&raquo;"
+rightDoubleQuote = "&rdquo;"
+rightSingleQuote = "&rsquo;"
 
 [markup.goldmark.parser]
 autoHeadingID = true
 autoHeadingIDType = "github"
 wrapStandAloneImageWithinParagraph = true
 
-  [markup.goldmark.parser.attribute]
-  block = false
-  title = true
+[markup.goldmark.parser.attribute]
+block = false
+title = true
 
 [markup.goldmark.renderer]
 hardWraps = false
@@ -66,202 +65,159 @@ unsafe = false
 xhtml = false
 
 [params]
-author = "Nusser Studios"
-authorimage = "../assets/images/global/author.webp"
+author = "Laboratório de Jogos"
+# authorimage = "images/global/logo-ist.png"
 og_image = "/images/tailbliss-cover.png"
-moto = "Super Fast, and Flexible"
-description = "A Hugo theme built with love, using TailwindCSS 3, Alpine.JS, and Hugo Pipes. Images are optimized for use with Hugo Pipes for WebP format."
+moto = "Videogame Research and Development at Técnico"
+description = "The Game Lab at Instituto Superior Técnico (Universidade de Lisboa) is a dedicated space for game design, development, academic research, and student collaboration."
 disable_theme_toggle = false
 disable_stay_uptodate = true
 
-  [params.p1]
-  heading = "Our mission"
-  image = "images/pages/our-mission.png"
+[params.sections.about]
+heading = "About"
+paragraphs = [
+  "The Game Lab is a space at the Alameda Campus of Instituto Superior Técnico (Universidade de Lisboa) dedicated to the development of academic projects in the field of Digital Games.",
+  "This space aims to host student groups for project discussions, support test sessions and evaluations with users, and display projects carried out within the scope of courses such as Game Design, Virtual Reality, and Autonomous Agents."
+]
 
-    [[params.p1.content]]
-    text = "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi. Cursus faucibus nunc nisl netus morbi vel porttitor vitae ut. Amet vitae fames senectus vitae."
+[[params.sections.about.cards]]
+number = "01"
+title = "The Space"
+style = "bg-zinc-900 text-white text-primary-400 text-zinc-200 text-zinc-400"
+text = "The Game Lab is a dedicated space at the Alameda Campus of Instituto Superior Técnico for academic digital game development."
 
-    [[params.p1.content]]
-    text = "Sollicitudin tristique eros erat odio sed vitae, consequat turpis elementum. Lorem nibh vel, eget pretium arcu vitae. Eros eu viverra donec ut volutpat donec laoreet quam urna. Sollicitudin tristique eroserat odio sed vitae, consequat turpis elementum. Lorem nibh vel, eget pretium arcu vitae. Eros eu viverra donec ut volutpat donec laoreet quam urna."
+[[params.sections.about.cards]]
+number = "02"
+title = "R&D Ecosystem"
+style = "bg-primary-600 text-white text-zinc-900 text-zinc-100 text-zinc-200"
+text = "Hosting student project groups, supporting testing sessions, evaluation workshops, and displaying interactive deployments."
 
-    [[params.p1.content]]
-    text = "Rhoncus nisl, libero egestas diam fermentum dui. At quis tincidunt vel ultricies. Vulputate aliquet velit faucibus semper. Pellentesque in venenatis vestibulum consectetur nibh id. In id ut tempus egestas. Enim sit aliquam nec, a. Morbi enim fermentum lacus in. Viverra."
+[[params.sections.about.cards]]
+number = "03"
+title = "Collaboration"
+style = "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white text-secondary-500 text-zinc-600 dark:text-zinc-400 text-zinc-400"
+text = "Uniting technical engineering paradigms with creative interactive assets across cross-department courses."
 
-  [params.p2]
-  heading = "Just in time for Hacktoberfest with JIT Tailwind."
-  image = "images/pages/hacktoberfest.jpg"
+[[params.sections.education.items]]
+title = "Game Design"
+desc = "Mechanics architecture, behavioral loops, player metrics, and rules systems layouts."
 
-    [[params.p2.content]]
-    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at purus non enim commodo tincidunt vel in nulla. Aenean pretium dolor non ultricies bibendum. Etiam quis blandit enim. Nunc condimentum ut lorem in faucibus. Phasellus varius ligula et commodo tristique. Nunc sodales nisl nec laoreet vehicula. Donec velit nibh, sollicitudin at nulla a, egestas dignissim eros. Sed lacinia hendrerit interdum. Vestibulum pellentesque sem venenatis nisl tempor accumsan sit amet tempus felis. Mauris leo diam, porttitor nec bibendum id, tempus ac nulla. Etiam congue ornare erat at convallis. Donec in nisi dapibus, mattis risus vel, imperdiet enim. Donec fermentum sit amet tortor nec tincidunt. Nam nec lectus tortor. Nunc sit amet laoreet orci, porta ornare massa. Phasellus eget lorem mi. Nam eleifend ultricies sapien, quis mollis leo bibendum at. Quisque viverra lorem sit amet magna aliquet, et dignissim arcu eleifend."
+[[params.sections.education.items]]
+title = "Virtual Reality"
+desc = "Immersive hardware pipelines, head-tracking spaces, and spatial rendering interaction loops."
 
-    [[params.p2.content]]
-    type = "table"
+[[params.sections.education.items]]
+title = "Autonomous Agents"
+desc = "Behavior trees, utility models, paths layouts, and procedural AI response metrics."
 
-      [[params.p2.content.columns]]
-      heading = "Column 1"
-      items = [ "Bullet point 1", "Bullet point 2", "Bullet point 3" ]
+[[params.sections.education.items]]
+title = "Thesis Projects"
+desc = "Advanced academic research, game engines integration, and experimental graphics evaluation."
 
-      [[params.p2.content.columns]]
-      heading = "Column 2"
-      items = [ "Bullet point 4", "Bullet point 5", "Bullet point 6" ]
+[[params.sections.games.highlights_before]]
+title = "Caleb's Demons"
+desc = "An atmospheric tactical action game deployed as a project benchmark."
+placeholder = "Caleb's Demons"
+year = "2021"
+tags = ["indie", "singleplayer", "action"]
+link = "/en/game/caleb-s-demons"
+image = "/images/caleb-demons-thumb.png" # Optional custom thumbnail path
 
-  [params.p3]
-  heading = "Backed by world-renowned investors"
+[[params.sections.games.highlights_after]]
+title = "Caleb's Demons"
+desc = "An atmospheric tactical action game deployed as a project benchmark."
+placeholder = "Caleb's Demons"
+year = "2021"
+tags = ["indie", "singleplayer", "action"]
+link = "/en/game/caleb-s-demons"
+image = "/images/caleb-demons-thumb.png" # Optional custom thumbnail path
 
-    [[params.p3.content]]
-    text = "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi. Cursus faucibus nunc nisl netus morbi vel porttitor vitae ut. Amet vitae fames senectus vitae."
+[[params.sections.games.highlights_after]]
+title = "Procedural Arena"
+desc = "Realtime asset engine developed alongside student workshops."
+placeholder = "Project Prototypes"
+year = "2020"
+tags = ["engine", "procedural", "workshop"]
+link = "/en/game/procedural-arena"
+image = "" 
 
-    [[params.p3.links]]
-    text = "Meet our investors and advisors"
-    url = "#"
 
-    [[params.p3.logos]]
-    identifier = "a"
-    image = "images/global/sample-logo.svg"
-    alt = "a"
+[[params.sections.events.items]]
+badge = "GGJ"
+badge_style = "bg-primary-100 dark:bg-primary-950 text-primary-600 dark:text-primary-400"
+title = "Global Game Jam"
+desc = "Hosting the localized edition for immersive prototype development sessions over 48 hours."
 
-    [[params.p3.logos]]
-    identifier = "b"
+[[params.sections.events.items]]
+badge = "AM"
+badge_style = "bg-secondary-100 dark:bg-secondary-950 text-secondary-600 dark:text-secondary-400"
+title = "Alumni Meeting"
+desc = "Annual conferences where past graduates working in premium studios share workflows."
 
-    [[params.p3.logos]]
-    identifier = "c"
+[params.sections.partners]
+heading = "Partners"
+text = "Our active ecosystem, computing equipment, and collaborative research initiatives are closely backed and shared with our core institutional partners."
+logos = [
+  { name = "Instituto Superior Técnico", id = "ist" },
+  { name = "INESC-ID", id = "inescid" },
+  { name = "GAIPS", id = "gaips" }
+]
 
-    [[params.p3.logos]]
-    identifier = "d"
+[params.sections.connect]
+heading = "Connect With Us"
+action = "/contact/"
+placeholder = "Enter your email"
+button = "Submit"
 
-    [[params.p3.logos]]
-    identifier = "e"
-
-    [[params.p3.logos]]
-    identifier = "f"
-
-  [params.p4]
-  heading = "From the blog"
-
-    [[params.p4.content]]
-    text = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa libero labore natus atque, ducimus sed."
-
-  [params.p5]
-  heading = "Stay Up to Date"
-  action = "#"
-  label = "Email address"
-  placeholder = "Enter your email"
-  button = "Notify me"
-
-    [[params.p5.content]]
-    text = "Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque."
-
-[params.social_media.github]
-enabled = true
-url = "https://github.com/nusserstudios"
-
+[params.social_media]
 [params.social_media.facebook]
 enabled = true
-url = "https://facebook.com/nusserstudios"
+url = "https://www.facebook.com/LabJogosIST"
 
 [params.social_media.instagram]
 enabled = true
-url = "https://instagram.com/nusserstudios"
+url = "https://instagram.com/labjogos"
 
-[params.social_media.twitter]
-enabled = true
-url = "https://twitter.com/nusserstudios"
-
+# Menus Architecture
 [[menu.main]]
-identifier = "prose"
-name = "Prose"
-url = "/prose/"
+name = "Projects"
+url = "/projects/"
 weight = 10
 
 [[menu.main]]
-identifier = "about"
-name = "About"
-url = "/about/"
+name = "Team"
+url = "/team/"
 weight = 20
 
 [[menu.main]]
-identifier = "categories"
-pre = "dropdown"
-name = "Categories"
+name = "Thesis"
+url = "/thesis/"
 weight = 30
 
 [[menu.main]]
-identifier = "dropdown"
-pre = "complexdropdown"
-name = "Dropdown"
+name = "Publications"
+url = "/publications/"
 weight = 40
 
 [[menu.main]]
-identifier = "contact"
 name = "Contact"
 url = "/contact/"
 weight = 50
 
-[[menu.categories]]
-identifier = "prose"
-name = "Prose"
-url = "/prose/"
-weight = 10
-
-[[menu.categories]]
-identifier = "about"
-name = "About"
-url = "/about/"
-weight = 20
-
-[[menu.dropdown]]
-identifier = "appearance"
-pre = "stars"
-name = "Appearance"
-post = "Easy customization"
-url = "#"
-weight = 10
-
-[[menu.dropdown]]
-identifier = "comments"
-pre = "comments"
-name = "Comments"
-post = "Check your latest comments"
-url = "#"
-weight = 20
-
-[[menu.dropdown]]
-identifier = "analytics"
-pre = "piechart"
-name = "Analytics"
-post = "Take a look at your statistics"
-url = "#"
-weight = 30
-
 [[menu.footer]]
-identifier = "about"
 name = "About"
 url = "/about/"
 weight = 10
 
 [[menu.footer]]
-identifier = "blog"
-name = "Blog"
-url = "/categories/blog/"
+name = "Projects"
+url = "/projects/"
 weight = 20
 
 [[menu.footer]]
-identifier = "news"
-name = "News"
-url = "/categories/news/"
-weight = 30
-
-[[menu.footer]]
-identifier = "prose"
-name = "Prose"
-url = "/prose/"
-weight = 40
-
-[[menu.footer]]
-identifier = "contact"
 name = "Contact"
 url = "/contact/"
-weight = 50
+weight = 30
 
 [taxonomies]
 category = "Categories"
@@ -291,4 +247,3 @@ privacyEnhanced = true
 [module.hugoVersion]
 extended = true
 min = "0.148.2"
-
