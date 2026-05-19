@@ -8,13 +8,13 @@ contentDir = "content"
 [languages]
 [languages.en]
 languageName = "English"
-languageCode = "en-GB"
+locale = "en-GB"
 contentDir = "content/en"
 weight = 1
 
 [languages.pt]
 languageName = "Português"
-languageCode = "pt-PT"
+locale = "pt-PT"
 contentDir = "content/pt"
 weight = 2
 
@@ -65,13 +65,17 @@ unsafe = false
 xhtml = false
 
 [params]
+favicon = "/images/favicon.ico"
 author = "Laboratório de Jogos"
 # authorimage = "images/global/logo-ist.png"
-og_image = "/images/tailbliss-cover.png"
-moto = "Videogame Research and Development at Técnico"
+og_image = "/images/logo.svg"
+logo = "/images/logo.svg"
+authorimage = "/images/logo.svg"
+moto = ""
 description = "The Game Lab at Instituto Superior Técnico (Universidade de Lisboa) is a dedicated space for game design, development, academic research, and student collaboration."
 disable_theme_toggle = false
 disable_stay_uptodate = true
+badge = "Made with hate by Obama."
 
 [params.sections.about]
 heading = "About"
@@ -81,22 +85,45 @@ paragraphs = [
 ]
 
 [[params.sections.about.cards]]
-number = "01"
-title = "The Space"
+title = "Education"
 style = "bg-zinc-900 text-white text-primary-400 text-zinc-200 text-zinc-400"
-text = "The Game Lab is a dedicated space at the Alameda Campus of Instituto Superior Técnico for academic digital game development."
+text = "LabJogos offers multiple courses in the Specialization on Games in Instituto Superior Técnico and holds several Master Thesis and research projects in the fields of Games and Interactive Experiences."
+image = "/images/about/education.png"
+# link = "/education"
+
+[params.sections.about.cards.button]
+label = "See courses"
+link = "/education"
 
 [[params.sections.about.cards]]
-number = "02"
-title = "R&D Ecosystem"
+title = "Mission"
 style = "bg-primary-600 text-white text-zinc-900 text-zinc-100 text-zinc-200"
-text = "Hosting student project groups, supporting testing sessions, evaluation workshops, and displaying interactive deployments."
+text = "LabJogos promotes the values of Games, bridging the gap between Academia, Industry, and Society. As a continued mission to help spread knowledge on game development in and out of Instituto Superior Técnico, LabJogos promotes a range of events throughout the year."
+image = "/images/about/mission.png"
+
+[params.sections.about.cards.button]
+label = "See More"
+link = "/mission"
 
 [[params.sections.about.cards]]
-number = "03"
-title = "Collaboration"
+title = "Inovation"
 style = "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white text-secondary-500 text-zinc-600 dark:text-zinc-400 text-zinc-400"
-text = "Uniting technical engineering paradigms with creative interactive assets across cross-department courses."
+text = "At LabJogos we support innovation in game creation by offering multidisciplinary teams to develop games with the help of Fine Arts students."
+image = "/images/about/innovation.png"
+
+[params.sections.education]
+heading = "Education"
+images = [
+  "images/education/showcase01.jpg",
+  "images/education/showcase02.jpg",
+]
+
+[[params.sections.education.items]]
+title = "Foundations of Game Design"
+
+[[params.sections.education.items]]
+title = "Foundations of Game Design"
+desc = "Introduction to core mechanics, design loops, and world balancing blueprints."
 
 [[params.sections.education.items]]
 title = "Game Design"
@@ -121,7 +148,7 @@ placeholder = "Caleb's Demons"
 year = "2021"
 tags = ["indie", "singleplayer", "action"]
 link = "/en/game/caleb-s-demons"
-image = "/images/caleb-demons-thumb.png" # Optional custom thumbnail path
+image = "/images/caleb-demons-thumb.png"  # Optional custom thumbnail path
 
 [[params.sections.games.highlights_after]]
 title = "Caleb's Demons"
@@ -130,7 +157,7 @@ placeholder = "Caleb's Demons"
 year = "2021"
 tags = ["indie", "singleplayer", "action"]
 link = "/en/game/caleb-s-demons"
-image = "/images/caleb-demons-thumb.png" # Optional custom thumbnail path
+image = "/images/caleb-demons-thumb.png"  # Optional custom thumbnail path
 
 [[params.sections.games.highlights_after]]
 title = "Procedural Arena"
@@ -139,20 +166,39 @@ placeholder = "Project Prototypes"
 year = "2020"
 tags = ["engine", "procedural", "workshop"]
 link = "/en/game/procedural-arena"
-image = "" 
-
+image = ""
 
 [[params.sections.events.items]]
 badge = "GGJ"
-badge_style = "bg-primary-100 dark:bg-primary-950 text-primary-600 dark:text-primary-400"
 title = "Global Game Jam"
-desc = "Hosting the localized edition for immersive prototype development sessions over 48 hours."
+desc = "Global Game Jam brings together programmers, artists, musicians, game designers and other video game lovers with the goal of developing a game in 48 hours."
+image = "images/events/ggj.jpg"
+link = "/events/global-game-jam/"
+# badge_style = "bg-red-500 text-white"
 
 [[params.sections.events.items]]
-badge = "AM"
-badge_style = "bg-secondary-100 dark:bg-secondary-950 text-secondary-600 dark:text-secondary-400"
+badge = "Mojo"
+# badge_style = "bg-primary-100 dark:bg-primary-950 text-primary-600 dark:text-primary-400"
+title = "Montra de Jogos"
+desc = "Montra de Jogos (MOJO) is an annual game showcase of what is best produced in the area of games by the IST community."
+image = "images/events/mojo.jpg"
+link = "/events/global-game-jam/"
+
+[[params.sections.events.items]]
+badge = "Alumni Meets"
+# badge_style = "bg-secondary-100 dark:bg-secondary-950 text-secondary-600 dark:text-secondary-400"
 title = "Alumni Meeting"
 desc = "Annual conferences where past graduates working in premium studios share workflows."
+image = "images/events/alumni.jpg"
+link = "/events/global-game-jam/"
+
+[[params.sections.events.items]]
+badge = "Talk N' Play"
+# badge_style = "bg-secondary-100 dark:bg-secondary-950 text-secondary-600 dark:text-secondary-400"
+title = "Talk N' Play"
+desc = "Talk n' Play is our most frequent event where we invite students to participate in a discussion of anything and everything games related."
+image = "images/events/tnp.jpg"
+link = "/events/global-game-jam/"
 
 [params.sections.partners]
 heading = "Partners"
