@@ -1,0 +1,948 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,500,700,900");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+@source "layouts/**/*.html";
+@source "content/**/*.md";
+@source "assets/**/*.js";
+
+@theme {
+  --color-archive-blue: #0771b8;
+  --color-archive-red: #e72a33;
+  --color-white: #fff;
+  --color-black: #000;
+
+  --font-sans: "Open Sans", system-ui, sans-serif;
+  --font-heading: "Poppins", system-ui, sans-serif;
+}
+
+:root {
+  /* Functional Light Design Token Mapping */
+  --site-bg-primary: #ffffff;
+  --site-text-primary: #1f2022;
+  --site-text-secondary: #495057;
+
+  --section-bg-news: #f1f3f5;
+  --section-bg-about: #ffffff;
+  --section-bg-games: #f8f9fa;
+  --section-bg-events-base: #5a5a5a;
+  --section-bg-partners: #ffffff;
+
+  --card-bg: #ffffff;
+  --card-bg-about: #f8f9fa;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 16px 35px rgba(0, 0, 0, 0.08);
+
+  --games-wrapper-bg: #ffffff;
+  --games-wrapper-border: rgba(0, 0, 0, 0.06);
+
+  --watermark-light-bg: rgba(0, 0, 0, 0.035);
+  --watermark-dark-bg: rgba(0, 0, 0, 0.04);
+  --watermark-event-bg: rgba(255, 255, 255, 0.15);
+}
+
+.dark {
+  /* Functional Dark Design Token Mapping */
+  --site-bg-primary: #141416;
+  --site-text-primary: #f8f9fa;
+  --site-text-secondary: #cbd5e1;
+
+  --section-bg-news: #1d1d22;
+  --section-bg-about: #141416;
+  --section-bg-games: #141416;
+  --section-bg-events-base: #141416;
+  --section-bg-partners: #141416;
+
+  --card-bg: #1d1d22;
+  --card-bg-about: #232329;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 20px 45px rgba(0, 0, 0, 0.45);
+
+  --games-wrapper-bg: #1d1d22;
+  --games-wrapper-border: rgba(255, 255, 255, 0.05);
+
+  --watermark-light-bg: rgba(255, 255, 255, 0.06);
+  --watermark-dark-bg: rgba(255, 255, 255, 0.06);
+  --watermark-event-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   2. CORE UTILITY RESETS & GLOBAL ARCHITECTURES
+   ========================================================================== */
+@utility prose-2xl {
+  max-width: 80ch !important;
+  font-size: 110%;
+}
+
+body,
+.page-aboutus,
+.page-events,
+.page-people,
+.page-study,
+section {
+  background-color: var(--site-bg-primary) !important;
+  color: var(--site-text-primary) !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+img[loading="lazy"] {
+  content-visibility: auto;
+  contain: layout style paint;
+}
+
+.hero-container,
+.hero-image {
+  width: 100%;
+  max-width: 576px;
+  aspect-ratio: 1 / 1;
+}
+
+.hero-container {
+  contain: layout style;
+  overflow: hidden;
+}
+
+.hero-image {
+  contain: layout style paint;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+::-moz-selection {
+  color: var(--color-white);
+  background-color: var(--color-archive-blue);
+}
+
+::selection {
+  color: var(--color-white);
+  background-color: var(--color-archive-blue);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   3. SECTION HEADER TYPOGRAPHY WATERMARKS
+   ========================================================================== */
+.section-title-container {
+  position: relative;
+  display: block;
+  text-align: center;
+  padding: 4.5rem 0;
+  margin-bottom: 2rem;
+  overflow: visible;
+}
+
+.section-title-container h2 {
+  position: relative;
+  font-family: var(--font-heading), sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 3.5rem !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 5;
+  opacity: 1 !important;
+}
+
+.section-title-container h2::after {
+  content: attr(title);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  width: 100%;
+  font-family: var(--font-heading), sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 2.5em !important;
+  letter-spacing: -0.01em !important;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   4. COMPONENT INTERFACE MODULES
+   ========================================================================== */
+
+/* --- MODULE 1: UPDATES SECTION --- */
+.recent-content.index-news {
+  background-color: var(--section-bg-news) !important;
+}
+
+.index-news .section-title-container h2 {
+  color: var(--color-archive-red) !important;
+}
+
+.index-news .section-title-container h2::after {
+  color: var(--watermark-light-bg) !important;
+}
+
+.dark .recent-content.index-news h3,
+.dark .recent-content.index-news h3 a,
+.dark .recent-content.index-news p {
+  color: #e2e8f0 !important;
+}
+
+/* --- MODULE 2: ABOUT US SECTION --- */
+.about-us.index-about-us {
+  background-color: var(--section-bg-about) !important;
+}
+
+.index-about-us .section-title-container h2 {
+  color: var(--color-archive-blue) !important;
+}
+
+.index-about-us .section-title-container h2::after {
+  color: var(--watermark-dark-bg) !important;
+}
+
+.index-about-us .grid>div {
+  background-color: var(--card-bg-about) !important;
+  border-color: var(--card-border) !important;
+}
+
+.index-about-us a.inline-flex.bg-primary-600 {
+  background-color: var(--color-archive-blue) !important;
+  color: var(--color-white) !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 4px 10px rgba(7, 113, 184, 0.2) !important;
+}
+
+.index-about-us a.inline-flex.bg-primary-600:hover {
+  background-color: #055a94 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(7, 113, 184, 0.3) !important;
+}
+
+.index-about-us .mt-auto a {
+  background-color: rgba(7, 113, 184, 1) !important;
+  color: #ffffff !important;
+}
+
+.index-about-us .mt-auto a:hover {
+  background-color: rgba(7, 11, 184, 1) !important;
+}
+
+/* --- MODULE 3: GAMES SECTION --- */
+.index-games {
+  position: relative;
+  background-color: var(--section-bg-games) !important;
+  overflow: hidden;
+}
+
+.index-games::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: -10%;
+  width: 120%;
+  height: 240px;
+  background-color: var(--color-archive-red);
+  transform: skewY(-4.5deg);
+  box-shadow: 0 8px 25px rgba(231, 42, 51, 0.15);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dark .index-games::before {
+  background-color: #b81d24;
+}
+
+.index-games .container,
+.index-games .section-title-container {
+  position: relative;
+  z-index: 10;
+}
+
+.index-games .section-title-container h2 {
+  color: var(--color-archive-red) !important;
+}
+
+.index-games .section-title-container h2::after {
+  color: var(--watermark-dark-bg) !important;
+}
+
+.game-container,
+.index-games .grid {
+  background-color: var(--games-wrapper-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 2.5rem 1.5rem !important;
+  border-radius: 16px !important;
+  border: 1px solid var(--games-wrapper-border) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
+}
+
+.game-container {
+  padding-top: 1rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.game-container .item-a {
+  display: inline-flex !important;
+  float: none !important;
+  vertical-align: top !important;
+  white-space: normal !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+}
+
+.dark .game-container .item-a h3,
+.dark .game-container .item-a h3 a {
+  color: #ffffff !important;
+}
+
+.dark .game-container .item-a p {
+  color: #cbd5e1 !important;
+}
+
+/* ==========================================================================
+   EDUCATION COURSES SECTION (Clip-Path & Layout)
+   ========================================================================== */
+.index-education-courses {
+  position: relative;
+  background-color: var(--color-archive-red) !important;
+  padding-bottom: 4em;
+  -webkit-clip-path: polygon(100% 0,
+      100% 0,
+      0 5vw,
+      0 calc(100% - 2vw),
+      100% 100%,
+      100% 1em);
+  clip-path: polygon(100% 0,
+      100% 0,
+      0 5vw,
+      0 calc(100% - 2vw),
+      100% 100%,
+      100% 1em);
+}
+
+@media (min-width: 901px) {
+  .index-education-courses {
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 1149px) and (min-width: 901px) {
+  .index-education-courses {
+    padding-bottom: 0;
+    min-height: 0;
+  }
+}
+
+.courses-sem-group ul {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .courses-sem-group ul {
+    max-width: 600px;
+  }
+}
+
+/* Header Adjustments inside the Clip-Path */
+.index-education-courses .courses-subtitle h2 {
+  color: var(--color-white) !important;
+}
+
+.index-education-courses .courses-subtitle h2::after {
+  color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Layout Group Positioning */
+.index-education-courses .courses-sem-group {
+  position: relative;
+  padding-top: 100px;
+  margin-left: 46%;
+  /* Converted left:46% to margin-left for cleaner flow */
+  width: 52%;
+}
+
+@media (max-width: 1149px) and (min-width: 901px) {
+  .index-education-courses .courses-sem-group {
+    min-height: 400px;
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 900px) {
+  .index-education-courses .courses-sem-group {
+    padding-top: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.index-education-courses .courses-sem-group h4 {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .index-education-courses .courses-sem-group h4 {
+    padding-top: 10px;
+  }
+}
+
+/* Semester 1 & 2 Positioning */
+.index-education-courses .courses-sem-group .courses-sem1 {
+  margin-top: 40px;
+  text-align: left;
+}
+
+@media (max-width: 1149px) {
+  .index-education-courses .courses-sem-group .courses-sem1 {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 599px) {
+  .index-education-courses .courses-sem-group .courses-sem1 {
+    margin-top: 30px;
+  }
+}
+
+.index-education-courses .courses-sem-group .courses-sem2 {
+  margin-top: 10px;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .index-education-courses .courses-sem-group .courses-sem2 {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 599px) {
+  .index-education-courses .courses-sem-group .courses-sem2 {
+    margin-top: 50px;
+  }
+}
+
+/* List & Links Styling */
+.index-education-courses .courses-sem-group ul {
+  line-height: 1.5em;
+  padding-top: 1em;
+  color: hsla(0, 0%, 100%, 0.85);
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 700;
+  list-style: none;
+}
+
+@media (max-width: 900px) {
+  .index-education-courses .courses-sem-group ul {
+    font-size: 1.2em;
+    line-height: 1.8em;
+  }
+}
+
+@media (max-width: 530px) {
+  .index-education-courses .courses-sem-group ul {
+    font-size: 1.2em;
+    line-height: 2em;
+  }
+}
+
+.index-education-courses .courses-sem-group ul li {
+  transition: transform 0.2s ease-in-out;
+}
+
+@media (max-width: 599px) {
+  .index-education-courses .courses-sem-group ul li {
+    border-bottom: 2px solid hsla(0, 0%, 100%, 0.26);
+    line-height: 1.5em;
+    margin-bottom: 0.6em;
+    padding-bottom: 0.5em;
+  }
+}
+
+.index-education-courses .courses-sem-group ul li a {
+  text-decoration: none;
+  color: hsla(0, 0%, 100%, 0.85);
+  transition: color 0.2s ease;
+  display: block;
+}
+
+.index-education-courses .courses-sem-group ul li:hover {
+  transform: translateX(1%);
+}
+
+/* Re-align hover transform for right-aligned elements */
+.index-education-courses .courses-sem-group .courses-sem2 ul li:hover {
+  transform: translateX(-1%);
+}
+
+.index-education-courses .courses-sem-group ul li:hover a {
+  color: #fff;
+}
+
+/* --- MODULE 4: EVENTS SECTION */
+.events.index-partners {
+  position: relative;
+  background-color: var(--section-bg-events-base) !important;
+  overflow: hidden;
+}
+
+.events.index-partners::before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: -10%;
+  width: 120%;
+  height: 90%;
+  background-color: var(--color-archive-blue);
+  transform: skewY(2.5deg);
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.15),
+    0 5px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dark .events.index-partners::before {
+  background-color: #055488;
+}
+
+.events.index-partners .container,
+.events.index-partners .section-title-container {
+  position: relative;
+  z-index: 10;
+}
+
+.events.index-partners .section-title-container h2 {
+  color: var(--color-white) !important;
+}
+
+.events.index-partners .section-title-container h2::after {
+  color: var(--watermark-event-bg) !important;
+}
+
+/* Dynamic Content Card Base Canvas Frame */
+.custom-events-card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* Clear outer stroke boxes inside the data info layouts */
+.event-content-pane,
+.event-content-pane div,
+.event-content-pane img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.event-tab-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.85rem 1.25rem !important;
+  font-family: var(--font-heading), sans-serif !important;
+  font-size: 0.725rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--site-text-secondary) !important;
+  background: transparent !important;
+  border-left: 3px solid transparent !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-radius: 0 6px 6px 0 !important;
+  /* Continuous linear block design */
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover-state background glow transitions */
+.event-tab-btn:hover:not(.is-active) {
+  color: var(--color-archive-blue) !important;
+  background: rgba(7, 113, 184, 0.04) !important;
+}
+
+.dark .event-tab-btn:hover:not(.is-active) {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Active Highlight Indicator State Mapping */
+.event-tab-btn.is-active {
+  color: var(--color-archive-blue) !important;
+  background: rgba(7, 113, 184, 0.07) !important;
+  border-left-color: var(--color-archive-blue) !important;
+}
+
+.dark .event-tab-btn.is-active {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-left-color: var(--color-archive-blue) !important;
+}
+
+/* Data Output Typography Colors */
+.custom-events-card h3 {
+  color: var(--site-text-primary) !important;
+  font-weight: 700;
+}
+
+.custom-events-card p {
+  color: var(--site-text-secondary) !important;
+}
+
+.dark .custom-events-card h3 {
+  color: #ffffff !important;
+}
+
+.dark .custom-events-card p {
+  color: #cbd5e1 !important;
+}
+
+.custom-events-card h3 {
+  color: var(--site-text-primary) !important;
+  font-weight: 800 !important;
+  font-size: 1.875rem !important;
+  /* Default fallback match for text-3xl */
+  line-height: 1.25 !important;
+}
+
+@media (min-width: 768px) {
+  .custom-events-card h3 {
+    font-size: 2.25rem !important;
+    /* Desktop scale fallback match for text-4xl */
+  }
+}
+
+.dark .custom-events-card h3 {
+  color: #ffffff !important;
+}
+
+/* --- MODULE 5: PARTNERS SECTION --- */
+
+.partners.index-partners {
+  background-color: var(--section-bg-partners);
+}
+
+.partners.index-partners .section-title-container h2 {
+  color: var(--color-archive-blue);
+}
+
+.partners.index-partners .section-title-container h2::after {
+  color: var(--watermark-light-bg);
+}
+
+.partner-card {
+  background-color: var(--site-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: auto;
+  padding: 1rem;
+}
+
+.partner-card img {
+  max-height: 3rem;
+  max-width: 80%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/*----------------------*/
+
+article,
+.game-container .item-a {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+article:hover,
+.game-container .item-a:hover,
+.partners.index-partners .container>div:last-of-type>div:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover) !important;
+}
+
+@media (max-width: 768px) {
+  .section-title-container {
+    padding: 2.5rem 0;
+  }
+
+  .section-title-container h2 {
+    font-size: 2.35rem !important;
+  }
+
+  .section-title-container h2::after {
+    font-size: 1.8em !important;
+  }
+}
+
+@media (min-width: 768px) {
+
+  /* Events Section Grid Expansion Alignments */
+  .custom-events-card {
+    grid-template-columns: 240px 1fr !important;
+  }
+
+  /* Enforces absolute grid-locking on active data panes to stop body overflow text breaks */
+  .event-content-pane {
+    display: grid !important;
+    grid-template-columns: 340px 1fr !important;
+    gap: 2.5rem !important;
+    align-items: start !important;
+  }
+
+  .event-content-pane img {
+    border-radius: 0.75rem !important;
+  }
+}
+
+/* Font family configuration */
+:root {
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
+    "Segoe UI Symbol",
+    "Android Emoji",
+    "EmojiSymbols";
+}
+
+/* Form inputs & placeholders utilizing/* Custom prose styles for markdown content */
+.prose {
+  max-width: 65ch;
+  color: var(--site-text-secondary);
+}
+
+.prose h1 {
+  color: var(--site-text-primary);
+  font-weight: 800;
+  font-size: 2.25rem;
+  margin-top: 0;
+  margin-bottom: 0.8888889rem;
+  line-height: 1.1111111;
+}
+
+.prose h2 {
+  color: var(--site-text-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.3333333;
+}
+
+.prose h3 {
+  color: var(--site-text-primary);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--site-text-primary);
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.625;
+}
+
+.prose p {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.75;
+}
+
+.prose a {
+  color: var(--site-text-primary);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  opacity: 0.75;
+}
+
+.prose strong {
+  color: var(--site-text-primary);
+  font-weight: 600;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.625rem;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.625rem;
+}
+
+.prose li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose blockquote {
+  font-weight: 500;
+  font-style: italic;
+  color: var(--site-text-secondary);
+  border-left-width: 0.25rem;
+  border-left-color: var(--card-border);
+  quotes: "\201C" "\201D" "\2018" "\2019";
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+  padding-left: 1rem;
+}
+
+.prose code {
+  color: var(--site-text-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  background-color: var(--section-bg-news);
+  padding: 0.25rem 0.375rem;
+  border-radius: 0.375rem;
+}
+
+.prose pre {
+  color: var(--site-text-secondary);
+  background-color: var(--section-bg-news);
+  overflow-x: auto;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.7142857;
+  margin-top: 1.7142857rem;
+  margin-bottom: 1.7142857rem;
+  border-radius: 0.375rem;
+  padding: 0.8571429rem 1.1428571rem;
+}
+
+.prose pre code {
+  background-color: transparent;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-weight: inherit;
+  color: var(--site-text-primary);
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.prose table {
+  width: 100%;
+  table-layout: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.7142857;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.prose thead {
+  border-bottom: 1px solid var(--card-border);
+}
+
+.prose thead th {
+  color: var(--site-text-primary);
+  font-weight: 600;
+  vertical-align: bottom;
+  padding-right: 0.5714286rem;
+  padding-bottom: 0.5714286rem;
+  padding-left: 0.5714286rem;
+  text-align: left;
+}
+
+.prose tbody tr {
+  border-bottom: 1px solid var(--card-border);
+}
+
+.prose tbody tr:last-child {
+  border-bottom-width: 0;
+}
+
+.prose tbody td {
+  vertical-align: baseline;
+  padding: 0.5714286rem;
+}
+
+.prose tbody td p {
+  margin: 0;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--site-text-secondary);
+  opacity: 0.6;
+}
+
+#cta-email::placeholder {
+  color: var(--site-text-secondary);
+  opacity: 0.5;
+}
+
+h1.text-white {
+  color: var(--site-text-primary) !important;
+}
+
+.dark h1.text-white {
+  color: var(--color-white) !important;
+}

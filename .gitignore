@@ -1,1 +1,38 @@
-/public
+# Ignore the automatically generated output folder containing the fully built HTML/CSS
+/public/
+
+# Ignore the automatic cache folder where Hugo stores resized images and processed assets
+/resources/
+
+# Ignore dependencies downloaded by your tailbliss theme configuration
+**/node_modules/
+**/.pnpm/
+
+# Ignore local development environment files that might contain secrets
+.env
+.env*.local
+
+.sass-cache/
+.eslintcache
+.stylelintcache
+**/.vite/
+**/.pnpm-debug.log*
+
+# MacOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows system files
+Thumbs.db
+Ehthumbs.db
+Desktop.ini
+
+# Common IDE project folders
+/.idea/
+/.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

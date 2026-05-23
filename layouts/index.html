@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<section class="recent-content index-news py-16 border-b border-zinc-200 dark:border-zinc-800">
+<section class="recent-content index-news py-16 border-b">
   <div class="container mx-auto px-4 max-w-7xl">
     <div class="section-title-container">
       <h2 title="{{ T "updates" }}">{{ T "updates" }}</h2>
@@ -11,18 +11,24 @@
     {{ if len $updates }}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {{ range first 3 $updates }}
-      <article
-        class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 shadow-sm hover:shadow transition">
+      <article class="rounded-lg p-6 shadow-sm hover:shadow transition">
+
+        {{ with .Params.featured_image }}
+        <div class="mb-4 aspect-video overflow-hidden rounded-md">
+          <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        {{ end }}
+
         <div class="space-y-2">
-          <span class="text-xs font-semibold uppercase text-zinc-400 tracking-wider">
+          <span class="text-xs font-semibold uppercase tracking-wider">
             {{ .Section }}
           </span>
-          <h3 class="font-heading font-bold text-lg text-zinc-900 dark:text-white">
-            <a href="{{ .RelPermalink }}" class="hover:underline text-zinc-900 dark:text-white">
+          <h3 class="font-heading font-bold text-lg">
+            <a href="{{ .RelPermalink }}" class="hover:underline">
               {{ .Title }}
             </a>
           </h3>
-          <p class="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-3">
+          <p class="text-sm line-clamp-3">
             {{ .Summary | plainify }}
           </p>
         </div>
@@ -30,7 +36,7 @@
       {{ end }}
     </div>
     {{ else }}
-    <div class="text-center py-8 text-zinc-500 dark:text-zinc-400 text-sm italic">
+    <div class="text-center py-8 text-sm italic">
       {{ T "no_updates" }}
     </div>
     {{ end }}
@@ -41,84 +47,61 @@
   <div class="container mx-auto px-4 max-w-7xl">
 
     <div class="section-title-container">
-      <h2 title="{{ T "about_us" }}">{{ T "about_us" }}</h2>
+      {{ $aboutHeading := index .Site.Params.sections.about (printf "heading_%s" .Site.Language.Lang) }}
+      <h2 title="{{ $aboutHeading }}">{{ $aboutHeading }}</h2>
     </div>
 
     <div class="text-center max-w-2xl mx-auto mb-20 -mt-4">
-      <p class="text-zinc-600 dark:text-zinc-400">
-        {{ .Site.Params.moto }}
+      <p class="text-sm leading-relaxed">
+        {{ index .Site.Params (printf "moto_%s" .Site.Language.Lang) }}
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto px-4 justify-items-center">
 
       {{ range .Site.Params.sections.about.cards }}
-      {{ $w := split .style " " }}
+      <div
+        class="rounded-2xl text-center transition-all w-full px-6 sm:px-8 pt-[110px] pb-16 min-h-[580px] h-auto flex flex-col items-center justify-start relative group"
+        style="max-w: 290px !important;">
 
-      <div class="
-        bg-zinc-50/40
-        dark:bg-zinc-900/40
-        border
-        dark:border-zinc-800/80
-        rounded-2xl
-        text-center
-        transition-all
-        w-full
-        px-8
-        pt-[110px]
-        pb-16
-        min-h-[580px]
-        h-auto
-        flex
-        flex-col
-        items-center
-        justify-start
-        relative
-        group
-      " style="background-color: {{ index $w 0 | default " transparent" }}; max-w: 290px !important;">
+        {{ if .image }}
+        <div class="flex justify-center shrink-0 mt-6 mb-2">
+          <img src="{{ .image | relURL }}" alt="{{ index . (printf "title_%s" $.Site.Language.Lang) }}"
+            class="w-24 h-24 object-contain opacity-95">
+        </div>
+        {{ end }}
 
-        <div class="flex flex-col items-center space-y-3 w-full">
-
-          {{ if .image }}
-          <div class="flex justify-center shrink-0 mt-6 mb-2">
-            <img src="{{ .image | relURL }}" alt="{{ .title }}" class="w-24 h-24 object-contain opacity-95">
-          </div>
+        <div class="shrink-0 mb-3">
+          {{ $url := "" }}
+          {{ with .button_link }}
+          {{ $p := site.GetPage . }}
+          {{ if $p }}
+          {{ $url = $p.RelPermalink }}
+          {{ else }}
+          {{ $url = . | relLangURL }}
+          {{ end }}
           {{ end }}
 
-          <div class="shrink-0">
-            {{ $url := "" }}
-            {{ with .link }}
-            {{ $p := site.GetPage . }}
-            {{ if $p }}
-            {{ $url = $p.RelPermalink }}
-            {{ else }}
-            {{ $url = . | relLangURL }}
-            {{ end }}
-            {{ end }}
-
-            {{ if $url }}
-            <a href="{{ $url }}"
-              class="text-2xl font-bold tracking-tight text-primary-600 hover:text-primary-500 transition">
-              {{ .title }}
-            </a>
-            {{ else }}
-            <div class="text-2xl font-bold tracking-tight text-primary-600">
-              {{ .title }}
-            </div>
-            {{ end }}
+          {{ if $url }}
+          <a href="{{ $url }}" class="text-2xl font-bold tracking-tight transition hover:underline">
+            {{ index . (printf "title_%s" $.Site.Language.Lang) }}
+          </a>
+          {{ else }}
+          <div class="text-2xl font-bold tracking-tight">
+            {{ index . (printf "title_%s" $.Site.Language.Lang) }}
           </div>
-
-          <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            {{ .text }}
-          </p>
-
+          {{ end }}
         </div>
 
-        {{ if .button }}
-        <div class="mt-auto pt-8 shrink-0">
-          <a href="{{ .button.link | relLangURL }}"
-            class="inline-flex items-center px-6 py-2.5 text-xs font-bold uppercase tracking-wider bg-primary-600 text-white rounded-md hover:bg-primary-500 transition shadow-sm">
-            {{ if eq .button.label "See courses" }}{{ T "see_courses" }}{{ else }}{{ T "see_more" }}{{ end }}
+        <p class="text-sm leisure-relaxed">
+          {{ index . (printf "text_%s" $.Site.Language.Lang) }}
+        </p>
+
+        {{ if .button_link }}
+        <div class="mt-auto pt-8 shrink-0 w-full">
+          <a href="{{ .button_link | relLangURL }}"
+            class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold uppercase tracking-wider bg-primary-600 rounded-md transition shadow-md hover:shadow-lg">
+            {{ index . (printf "button_label_%s" $.Site.Language.Lang) }}
           </a>
         </div>
         {{ end }}
@@ -140,7 +123,7 @@
 
     <div class="flex justify-end mb-4 -mt-4 pr-4">
       <a href="{{ .Site.Params.sections.games.see_more_url | default "/projects/" | relLangURL }}"
-        class="px-4 py-1.5 text-xs font-bold tracking-wider uppercase bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded transition">
+        class="px-4 py-1.5 text-xs font-bold tracking-wider uppercase rounded transition">
         {{ T "see_more" }}
       </a>
     </div>
@@ -149,7 +132,7 @@
 
       <button type="button"
         onclick="document.getElementById('games-scroller').scrollBy({left: -360, behavior: 'smooth'})"
-        class="bg-white hover:bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 shadow-lg transition-colors"
+        class="shadow-lg transition-colors"
         style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 30; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
         <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
@@ -179,7 +162,7 @@
 
       <button type="button"
         onclick="document.getElementById('games-scroller').scrollBy({left: 360, behavior: 'smooth'})"
-        class="bg-white hover:bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 shadow-lg transition-colors"
+        class="shadow-lg transition-colors"
         style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 30; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
         <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
@@ -221,15 +204,13 @@
     <div class="courses-grid">
 
       <div style="position: relative; width: 100%; max-width: 500px; height: 320px; margin: 0 auto;">
-        <div
-          class="bg-zinc-100 dark:bg-zinc-800 border-4 border-white dark:border-zinc-950 shadow-lg rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
+        <div class="shadow-lg rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
           style="position: absolute; top: 0; left: 0; width: 70%; height: 70%; z-index: 10;">
           <img src="{{ index .Site.Params.sections.education.images 0 | relURL }}" alt="Course Feature Back"
             style="width: 100%; height: 100%; object-fit: cover;">
         </div>
 
-        <div
-          class="bg-zinc-200 dark:bg-zinc-800 border-4 border-white dark:border-zinc-950 shadow-2xl rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
+        <div class="shadow-2xl rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
           style="position: absolute; bottom: 0; right: 0; width: 70%; height: 70%; z-index: 20;">
           <img src="{{ index .Site.Params.sections.education.images 1 | relURL }}" alt="Course Feature Front"
             style="width: 100%; height: 100%; object-fit: cover;">
@@ -239,27 +220,47 @@
       <div class="courses-sem-group flex flex-col justify-center">
 
         <div class="courses-sem1 mb-8">
-          <h4 class="font-heading text-lg dark:text-white mb-4">{{ T "first_semester" }}</h4>
-          <ul>
-            {{ range first 3 .Site.Params.sections.education.items }}
-            <li>
-              <a href="{{ .link | default "#" }}" target="_blank" rel="noopener noreferrer">
-                {{ .title }}
+          <h4 class="font-heading text-lg mb-4">{{ T "first_semester" }}</h4>
+          <ul class="space-y-2 list-none">
+            {{ range .Site.Params.sections.education.items_sem1 }}
+            <li class="transition-transform hover:translate-x-1">
+              <a href="{{ .link | default "#" }}" target="_blank" rel="noopener noreferrer"
+                class="hover:underline opacity-90 hover:opacity-100">
+                {{ index . (printf "title_%s" $.Site.Language.Lang) }}
               </a>
             </li>
+            {{ else }}
+            {{ range first 3 .Site.Params.sections.education.items }}
+            <li class="transition-transform hover:translate-x-1">
+              <a href="{{ .link | default "#" }}" target="_blank" rel="noopener noreferrer"
+                class="hover:underline opacity-90 hover:opacity-100">
+                {{ index . (printf "title_%s" $.Site.Language.Lang) }}
+              </a>
+            </li>
+            {{ end }}
             {{ end }}
           </ul>
         </div>
 
         <div class="courses-sem2">
-          <h4 class="font-heading text-lg dark:text-white mb-4">{{ T "second_semester" }}</h4>
-          <ul>
-            {{ range last 3 .Site.Params.sections.education.items }}
-            <li>
-              <a href="{{ .link | default "#" }}" target="_blank" rel="noopener noreferrer">
-                {{ .title }}
+          <h4 class="font-heading text-lg mb-4">{{ T "second_semester" }}</h4>
+          <ul class="space-y-2 list-none">
+            {{ range .Site.Params.sections.education.items_sem2 }}
+            <li class="transition-transform hover:-translate-x-1">
+              <a href="{{ .link | default "#" }}" target="_blank" rel="noopener noreferrer"
+                class="hover:underline opacity-90 hover:opacity-100">
+                {{ index . (printf "title_%s" $.Site.Language.Lang) }}
               </a>
             </li>
+            {{ else }}
+            {{ range last 3 .Site.Params.sections.education.items }}
+            <li class="transition-transform hover:-translate-x-1">
+              <a href="{{ .link | default "#" }}" target="_blank" rel="noopener noreferrer"
+                class="hover:underline opacity-90 hover:opacity-100">
+                {{ index . (printf "title_%s" $.Site.Language.Lang) }}
+              </a>
+            </li>
+            {{ end }}
             {{ end }}
           </ul>
         </div>
@@ -270,17 +271,16 @@
   </div>
 </section>
 
-<section class="events index-partners py-16 border-t border-zinc-200 dark:border-zinc-800">
+<section class="events index-partners py-16 border-t">
   <div class="container mx-auto px-4 max-w-7xl">
     <div class="section-title-container">
       <h2 title="{{ T "events" }}">{{ T "events" }}</h2>
     </div>
 
     <div id="custom-events-card-wrapper"
-      class="custom-events-card bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 md:p-8 shadow-sm grid grid-cols-1 md:grid-cols-[240px_1fr] gap-10 items-start overflow-hidden">
+      class="custom-events-card rounded-2xl p-6 md:p-8 shadow-sm grid grid-cols-1 md:grid-cols-[240px_1fr] gap-10 items-start overflow-hidden">
 
-      <div
-        class="flex flex-col gap-1.5 pb-6 md:pb-0 pr-0 md:pr-4 sticky top-4 z-20 border-r border-zinc-100 dark:border-zinc-800/50">
+      <div class="flex flex-col gap-1.5 pb-6 md:pb-0 pr-0 md:pr-4 sticky top-4 z-20">
         {{ range $index, $element := .Site.Params.sections.events.items }}
         <button type="button" onclick="switchEvent(this, {{ $index }})"
           class="event-tab-btn {{ if eq $index 0 }}is-active{{ end }}">
@@ -294,32 +294,28 @@
 
         <div id="event-content-{{ $index }}"
           class="event-content-pane w-full grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-10 min-w-0"
-          style="grid-area: 1 / 1 / 2 / 2; 
-                 opacity: {{ if eq $index 0 }}1{{ else }}0{{ end }}; 
-                 transform: translateY({{ if eq $index 0 }}0px{{ else }}12px{{ end }}); 
-                 pointer-events: {{ if eq $index 0 }}auto{{ else }}none{{ end }}; 
-                 transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
+          style="grid-area: 1 / 1 / 2 / 2; opacity: {{ if eq $index 0 }}1{{ else }}0{{ end }}; transform: translateY({{ if eq $index 0 }}0px{{ else }}12px{{ end }}); pointer-events: {{ if eq $index 0 }}auto{{ else }}none{{ end }}; transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
 
           {{ if .image }}
-          <div
-            class="w-full aspect-video md:aspect-auto md:w-full md:h-52 bg-zinc-100 dark:bg-zinc-800/40 overflow-hidden rounded-xl shrink-0">
-            <img src="{{ .image | relURL }}" alt="{{ .title }}" class="w-full h-full object-cover block">
+          <div class="w-full aspect-video md:aspect-auto md:w-full md:h-52 overflow-hidden rounded-xl shrink-0">
+            <img src="{{ .image | relURL }}" alt="{{ index . (printf "title_%s" $.Site.Language.Lang) }}"
+              class="w-full h-full object-cover block">
           </div>
           {{ end }}
 
           <div class="min-w-0 flex-1 relative pb-12 self-start">
             <h3
-              class="font-heading font-bold text-3xl md:text-4xl leading-tight tracking-tight text-zinc-900 dark:text-white max-w-xl md:max-w-[85%]">
-              {{ .title }}
+              class="font-heading font-bold text-3xl md:text-4xl leading-tight tracking-tight max-w-xl md:max-w-[85%]">
+              {{ index . (printf "title_%s" $.Site.Language.Lang) }}
             </h3>
-            <p class="text-sm md:text-base mt-4 leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-xl">
-              {{ .desc }}
+            <p class="text-sm md:text-base mt-4 leading-relaxed max-w-xl">
+              {{ index . (printf "desc_%s" $.Site.Language.Lang) }}
             </p>
 
             {{ if .link }}
             <a href="{{ .link | relLangURL }}"
-              class="group/arrow absolute bottom-0 right-0 w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-all shadow-sm"
-              title="Learn more about {{ .title }}">
+              class="group/arrow absolute bottom-0 right-0 w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-sm"
+              title="Learn more about {{ index . (printf "title_%s" $.Site.Language.Lang) }}">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                 stroke="currentColor" class="w-4 h-4 transition-transform group-hover/arrow:translate-x-0.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7 7M21 12H3" />
@@ -356,28 +352,39 @@
   }
 </script>
 
-<section class="partners index-partners py-16 border-t border-zinc-200 dark:border-zinc-800">
+<section class="partners index-partners py-16 border-t">
   <div class="container mx-auto px-4 max-w-7xl">
-    <div class="section-title-container">
-      <h2 title="{{ T "partners" }}">{{ T "partners" }}</h2>
+
+    <div class="section-title-container text-center">
+      {{ $partnersHeading := index .Site.Params.sections.partners (printf "heading_%s" .Site.Language.Lang) | default "Partners" }}
+      <h2 title="{{ $partnersHeading }}">{{ $partnersHeading }}</h2>
     </div>
-    <div class="text-center">
-      <p>{{.Site.Params.sections.partners.text}}</p>
+
+    <div class="text-center mt-4">
+      <p class="max-w-3xl mx-auto text-sm leading-relaxed">
+        {{ index .Site.Params.sections.partners (printf "text_%s" .Site.Language.Lang) }}
+      </p>
     </div>
-    <div
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-75 dark:opacity-90">
+
+
+    <div class="mt-10 grid grid-cols-2 gap-8 items-center justify-items-center opacity-75 dark:opacity-90">
+
       {{ range .Site.Params.sections.partners.logos }}
       <div
-        class="p-4 rounded-lg border w-full flex items-center justify-center aspect-[3/2] shadow-sm hover:shadow hover:scale-[1.03] transition-all">
+        class="partner-card w-full flex items-center justify-center aspect-auto p-4 rounded-lg border shadow-sm hover:shadow hover:scale-[1.03] transition-all">
+
         <img src="{{ .image | relURL }}" alt="{{ .name }}"
-          class="max-h-12 max-w-full object-contain filter dark:brightness-110">
+          class="max-h-12 max-w-full object-contain {{ if .invert_dark }}dark:invert{{ end }}">
+
       </div>
       {{ end }}
+
     </div>
   </div>
 </section>
 
 {{ end }}
+
 
 {{ define "labjogos-game-card" }}
 {{ $item := .context }}
@@ -393,74 +400,72 @@
 {{ $year = or $item.Params.year (dateFormat "2006" $item.Date) }}
 {{ $tags = or $item.Params.categories $item.Params.tags }}
 {{ else }}
-{{ $title = $item.title }}
-{{ $desc = $item.desc }}
+{{ $title = index $item (printf "title_%s" $site.Language.Lang) }}
+{{ $desc = index $item (printf "desc_%s" $site.Language.Lang) }}
 {{ $link = $item.link }}
 {{ $img = $item.image }}
 {{ $year = $item.year }}
 {{ $tags = $item.tags }}
 {{ end }}
 
-<div
-  class="item-a group relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col"
+<div class="item-a group relative rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col"
   style="display: inline-flex !important; width: 340px !important; height: 420px !important; margin-right: 1.5rem !important; vertical-align: top !important; whitespace: normal !important; float: none !important;">
 
   <a href="{{ $link | default "#" }}" class="flex flex-col justify-between h-full p-4">
 
     <div>
       <div
-        class="img-container aspect-video w-full bg-zinc-800 rounded mb-4 overflow-hidden relative border border-zinc-200/40 dark:border-zinc-700/30 flex items-center justify-center shrink-0">
+        class="img-container aspect-video w-full rounded mb-4 overflow-hidden relative flex items-center justify-center shrink-0">
         {{ if $img }}
         <img src="{{ $img | relURL }}"
           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="{{ $title }}">
         {{ else }}
         <span
-          class="text-zinc-400 font-heading text-sm font-bold uppercase tracking-wider px-4 text-center whitespace-normal line-clamp-2">
-          {{ $item.placeholder | default $title }}
+          class="font-heading text-sm font-bold uppercase tracking-wider px-4 text-center whitespace-normal line-clamp-2">
+          {{ $placeholder := index $item (printf "placeholder_%s" $site.Language.Lang) }}
+          {{ $placeholder | default $title }}
         </span>
         {{ end }}
       </div>
 
       <div class="info-container w-full">
-        <h3
-          class="font-heading font-bold text-lg text-zinc-900 dark:text-white tracking-tight leading-snug mb-1.5 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-1">
+        <h3 class="font-heading font-bold text-lg tracking-tight leading-snug mb-1.5 transition-colors line-clamp-1">
           {{ $title }}
         </h3>
 
         <div class="flex flex-wrap gap-1.5 mb-2 min-h-[22px]">
           {{ if $year }}
           <span
-            class="inline-block px-2 py-0.5 text-[10px] font-bold tracking-wider bg-primary-600 text-white rounded uppercase leading-none">{{
-            $year }}</span>
+            class="inline-block px-2 py-0.5 text-[10px] font-bold tracking-wider bg-primary-600 rounded uppercase leading-none text-white">
+            {{ $year }}
+          </span>
           {{ end }}
         </div>
 
-        <div class="text text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 h-16 overflow-hidden">
+        <div class="text text-xs leading-relaxed h-16 overflow-hidden">
           <p class="line-clamp-3">{{ $desc }}</p>
         </div>
       </div>
     </div>
 
-    <div
-      class="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/80 mt-auto shrink-0 w-full">
-      <span
-        class="text-[11px] font-bold tracking-widest uppercase text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-colors">
-        {{ if $link }}{{ T "view_details" }}{{ end }}
+    {{ if $link }}
+    <div class="flex items-center justify-between pt-2 border-t mt-auto shrink-0 w-full">
+      <span class="text-[11px] font-bold tracking-widest uppercase transition-colors">
+        {{ T "view_details" }}
       </span>
-      {{ if $link }}
-      <div
-        class="more-arrow-box w-6 h-6 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 group-hover:bg-primary-600 group-hover:text-white transition-all">
+      <div class="more-arrow-box w-6 h-6 rounded-full flex items-center justify-center transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
           class="w-3.5 h-3.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7 7M21 12H3" />
         </svg>
       </div>
-    </div>{{ end }}
+    </div>
+    {{ end }}
 
   </a>
 
   <div
-    class="stripe-bottom-right absolute bottom-0 right-0 w-2 h-2 bg-primary-600 opacity-0 group-hover:opacity-100 transition-opacity rounded-tl">
+    class="stripe-bottom-right absolute bottom-0 right-0 w-2 h-2 opacity-0 group-hover:opacity-100 transition-opacity rounded-tl">
   </div>
 </div>
 {{ end }}

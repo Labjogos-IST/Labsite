@@ -1,6 +1,11 @@
+#TODO:
+# - about us page ( team + history + media kit)
+# - event page (year timeline)
+# - education ( courses + thesis)
+
+
 baseURL = "https://labjogos.tecnico.ulisboa.pt/"
 title = "Labjogos"
-theme = "tailbliss"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 contentDir = "content"
@@ -14,156 +19,12 @@ enableInlineShortcodes = true
 [pagination]
 pagerSize = 9
 
-# ==========================================
-# ENGLISH LANGUAGE CONFIGURATION & MENUS
-# ==========================================
-
+# content translated
 [languages.en]
 languageName = "English"
 locale = "en-GB"
 contentDir = "content/en"
 weight = 1
-
-[[languages.en.menu.main]]
-name = "News"
-url = "/posts"
-weight = 10
-
-[[languages.en.menu.main]]
-name = "Games"
-url = "/games"
-weight = 20
-
-[[languages.en.menu.main]]
-name = "Events"
-url = "/events"
-weight = 30
-
-[[languages.en.menu.main]]
-name = "Education"
-url = "/education"
-weight = 40
-
-[[languages.en.menu.main]]
-name = "About"
-url = "/about"
-weight = 50
-
-# FIXME: follow current page
-[[languages.en.menu.main]]
-name = "PT"
-url = "/pt"
-weight = 60
-
-[[languages.en.menu.footer]]
-name = "About"
-url = "/about"
-weight = 10
-
-[[languages.en.menu.footer]]
-name = "Contact"
-url = "/contact"
-weight = 20
-
-[languages.en.params]
-description = "The Game Lab at Instituto Superior Técnico (Universidade de Lisboa) is a dedicated space for game design, development, academic research, and student collaboration."
-badge = "Made with X"
-moto = ""
-
-[languages.en.params.sections.about]
-heading = "About"
-
-[[languages.en.params.sections.about.cards]]
-title = "Education"
-style = "bg-zinc-900 text-white text-primary-400 text-zinc-200 text-zinc-400"
-text = "LabJogos offers multiple courses in the Specialization on Games in Instituto Superior Técnico and holds several Master Thesis and research projects in the fields of Games and Interactive Experiences."
-image = "/images/about/education.png"
-
-[languages.en.params.sections.about.cards.button]
-label = "See courses"
-link = "education"
-
-[[languages.en.params.sections.about.cards]]
-title = "Mission"
-style = "bg-primary-600 text-white text-zinc-900 text-zinc-100 text-zinc-200"
-text = "LabJogos promotes the values of Games, bridging the gap between Academia, Industry, and Society. As a continued mission to help spread knowledge on game development in and out of Instituto Superior Técnico, LabJogos promotes a range of events throughout the year."
-image = "/images/about/mission.png"
-
-[languages.en.params.sections.about.cards.button]
-label = "See More"
-link = "mission"
-
-[[languages.en.params.sections.about.cards]]
-title = "Inovation"
-style = "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white text-secondary-500 text-zinc-600 dark:text-zinc-400 text-zinc-400"
-text = "At LabJogos we support innovation in game creation by offering multidisciplinary teams to develop games with the help of Fine Arts students."
-image = "/images/about/innovation.png"
-
-[languages.en.params.sections.education]
-heading = "Education"
-
-[[languages.en.params.sections.education.items]]
-title = "Artificial Intelligence in Games"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489420"
-
-[[languages.en.params.sections.education.items]]
-title = "Computer Graphics for Games"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/1127428915200239"
-
-[[languages.en.params.sections.education.items]]
-title = "Game Design"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489418"
-
-[[languages.en.params.sections.education.items]]
-title = "Autonomous Agents and Multi-Agent Systems"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489405"
-
-[[languages.en.params.sections.education.items]]
-title = "Game Development Methodology"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489421"
-
-[[languages.en.params.sections.education.items]]
-title = "Multimedia Content Production"
-link = "/https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489399"
-
-[[languages.en.params.sections.games.highlights_after]]
-title = "WIP"
-desc = "WIP"
-placeholder = "Project Prototypes"
-year = "2026"
-image = ""
-
-[[languages.en.params.sections.events.items]]
-badge = "GGJ"
-title = "Global Game Jam"
-desc = "Global Game Jam brings together programmers, artists, musicians, game designers and other video game lovers with the goal of developing a game in 48 hours."
-image = "images/events/ggj.jpg"
-link = "/events/global-game-jam/"
-
-[[languages.en.params.sections.events.items]]
-badge = "Mojo"
-title = "Montra de Jogos"
-desc = "Montra de Jogos (MOJO) is an annual game showcase of what is best produced in the area of games by the IST community."
-image = "images/events/mojo.jpg"
-link = "/events/global-game-jam/"
-
-[[languages.en.params.sections.events.items]]
-badge = "Alumni Meets"
-title = "Alumni Meeting"
-desc = "Annual conferences where past graduates working in premium studios share workflows."
-image = "images/events/alumni.jpg"
-link = "/events/global-game-jam/"
-
-[[languages.en.params.sections.events.items]]
-badge = "Talk N' Play"
-title = "Talk N' Play"
-desc = "Talk n' Play is our most frequent event where we invite students to participate in a discussion of anything and everything games related."
-image = "images/events/tnp.jpg"
-link = "/events/global-game-jam/"
-
-[languages.en.params.sections.partners]
-heading = "Partners"
-text = "Throughout the years, LabJogos interacted and collaborated with multiple partners that make the laboratory and its activities possible. Partners offer ideas and motivation to the community of LabJogos. "
 
 [languages.pt]
 languageName = "Português"
@@ -171,150 +32,91 @@ locale = "pt-PT"
 contentDir = "content/pt"
 weight = 2
 
+# Main Menu Links
+[[languages.en.menu.main]]
+name = "News"
+url = "/posts"
+weight = 10
 [[languages.pt.menu.main]]
 name = "Notícias"
 url = "/posts"
 weight = 10
 
+[[languages.en.menu.main]]
+name = "Games"
+url = "/games"
+weight = 20
 [[languages.pt.menu.main]]
 name = "Jogos"
 url = "/games"
 weight = 20
 
+[[languages.en.menu.main]]
+name = "Events"
+url = "/events"
+weight = 30
 [[languages.pt.menu.main]]
 name = "Eventos"
 url = "/events"
 weight = 30
 
+[[languages.en.menu.main]]
+name = "Education"
+url = "/education"
+weight = 40
 [[languages.pt.menu.main]]
 name = "Educação"
 url = "/education"
 weight = 40
 
+[[languages.en.menu.main]]
+name = "About"
+url = "/about"
+weight = 50
 [[languages.pt.menu.main]]
 name = "Sobre"
 url = "/about"
 weight = 50
 
-[[languages.pt.menu.main]]
-name = "EN"
-url = "/en"
-weight = 60
+# Footer Menu Links
+[[languages.en.menu.footer]]
+name = "About"
+url = "/about"
+weight = 10
+[[languages.pt.menu.footer]]
+name = "Sobre"
+url = "/about"
+weight = 10
+
+# Footer Menu Links
+[[languages.en.menu.footer]]
+name = "About"
+url = "/about"
+weight = 10
 
 [[languages.pt.menu.footer]]
 name = "Sobre"
 url = "/about"
 weight = 10
 
-[[languages.pt.menu.footer]]
-name = "Contactos"
-url = "/contact"
-weight = 20
+#FIXME: make this icon and not emoji ah
+[languages.en.params.footer_section]
+  text1 = "<strong>Contacts:</strong>"
+  text2 = """
+  📍 <a href="https://maps.app.goo.gl/VfFrrWGm4rhkvEEE9" target="_blank" class="hover:underline text-gray-300">Av. Prof. Dr. Cavaco Silva<br>2744-016 Porto Salvo, Lisboa, Portugal</a>
+  <br><br>
+  ✉️ <a href="mailto:labjogos@tecnico.ulisboa.pt" class="hover:underline text-gray-300">labjogos@tecnico.ulisboa.pt</a>
+  """
 
-[languages.pt.params]
-description = "O Laboratório de Jogos no Instituto Superior Técnico (Universidade de Lisboa) é um espaço dedicado ao design de jogos, desenvolvimento, investigação académica e colaboração de estudantes."
-badge = "Made with hate by Obama."
-moto = ""
+[languages.pt.params.footer_section]
+  text1 = "<strong>Contactos:</strong>"
+  text2 = """
+  📍 <a href="https://maps.app.goo.gl/VfFrrWGm4rhkvEEE9" target="_blank" class="hover:underline text-gray-300">Av. Prof. Dr. Cavaco Silva<br>2744-016 Porto Salvo, Lisboa, Portugal</a>
+  <br><br>
+  ✉️ <a href="mailto:labjogos@tecnico.ulisboa.pt" class="hover:underline text-gray-300">labjogos@tecnico.ulisboa.pt</a>
+  """
 
-[languages.pt.params.sections.about]
-heading = "Sobre Nós"
-paragraphs = [
-  "O LabJogos é um espaço no Campus da Alameda do Instituto Superior Técnico (Universidade de Lisboa) dedicado ao desenvolvimento de projetos académicos na área dos Jogos Digitais.",
-  "Este espaço visa acolher grupos de estudantes para discussões de projetos, apoiar sessões de testes e avaliações com utilizadores, e expor projetos realizados no âmbito de disciplinas como Design de Jogos, Realidade Virtual e Agentes Autónomos."
-]
-
-[[languages.pt.params.sections.about.cards]]
-title = "Educação"
-style = "bg-zinc-900 text-white text-primary-400 text-zinc-200 text-zinc-400"
-text = "No que toca a educação, o LabJogos oferece 6 cursos de Especialização em Jogos e realiza várias Teses de Mestrado e projectos de investigação nos campos dos Jogos e das Experiências Interactivas."
-image = "/images/about/education.png"
-
-[languages.pt.params.sections.about.cards.button]
-label = "Ver cursos"
-link = "education"
-
-[[languages.pt.params.sections.about.cards]]
-title = "Missão"
-style = "bg-primary-600 text-white text-zinc-900 text-zinc-100 text-zinc-200"
-text = "O LabJogos promove os valores dos Jogos, ultrapassando a distância entre a Academia, a Indústria e a Sociedade. Como missão contínua de ajudar a difundir o conhecimento sobre o desenvolvimento de jogos dentro e fora do Instituto Superior Técnico, o LabJogos promove uma série de eventos ao longo do ano."
-image = "/images/about/mission.png"
-
-[languages.pt.params.sections.about.cards.button]
-label = "Ver Mais"
-link = "mission"
-
-[[languages.pt.params.sections.about.cards]]
-title = "Inovação"
-style = "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white text-secondary-500 text-zinc-600 dark:text-zinc-400 text-zinc-400"
-text = "No LabJogos apoiamos a inovação na criação de jogos através da oferta de equipas multidisciplinares para o desenvolvimento dos mesmos com ajuda dos alunos de Belas Artes."
-image = "/images/about/innovation.png"
-
-[languages.pt.params.sections.education]
-heading = "Educação"
-
-[[languages.pt.params.sections.education.items]]
-title = "Inteligência Artificial para Jogos"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489420"
-
-[[languages.pt.params.sections.education.items]]
-title = "Computação Gráfica para Jogos"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/1127428915200239"
-
-[[languages.pt.params.sections.education.items]]
-title = "Design de Jogos"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489418"
-
-[[languages.pt.params.sections.education.items]]
-title = "Agentes Autónomos e Sistemas Multi-Agente"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489405"
-
-[[languages.pt.params.sections.education.items]]
-title = "Metodologia de Desenvolvimento de Jogos"
-link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489421"
-
-[[languages.pt.params.sections.education.items]]
-title = "Produção de Conteúdos Multimédia"
-link = "/https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489399"
-
-[[languages.pt.params.sections.games.highlights_after]]
-title = "WIP"
-desc = "WIP"
-placeholder = "Protótipos de Projetos"
-year = "2026"
-image = ""
-
-[[languages.pt.params.sections.events.items]]
-badge = "GGJ"
-title = "Global Game Jam"
-desc = "A Global Game Jam junta programadores, artistas, músicos, game designers e outros amantes de videojogos com o objectivo de desenvolver um jogo em 48 horas."
-image = "images/events/ggj.jpg"
-link = "/events/global-game-jam/"
-
-[[languages.pt.params.sections.events.items]]
-badge = "Mojo"
-title = "Montra de Jogos"
-desc = "Montra de Jogos (MOJO) é uma exposição anual de jogos do que é melhor produzido na área pela comunidade do IST."
-image = "images/events/mojo.jpg"
-link = "/events/global-game-jam/"
-
-[[languages.pt.params.sections.events.items]]
-badge = "Alumni Meets"
-title = "Alumni Meeting"
-desc = "A Alumni Meeting aproxima os antigos alunos dos seus colegas e escola, para uma partilha de experiências e visões na área de jogos."
-image = "images/events/alumni.jpg"
-link = "/events/global-game-jam/"
-
-[[languages.pt.params.sections.events.items]]
-badge = "Talk N' Play"
-title = "Talk N' Play"
-desc = "O Talk n' Play é o nosso evento mais frequente onde convidamos os estudantes a participar numa discussão sobre tudo e qualquer coisa relacionada com jogos"
-image = "images/events/tnp.jpg"
-link = "/events/global-game-jam/"
-
-[languages.pt.params.sections.partners]
-heading = "Parceiros"
-text = "Ao longo dos anos o LabJogos interagiu e colaborou com multiplos parceiros que tornam o laboratório e as suas actividades possíveis. Os parceiros oferecem as suas ideias e motivação à comunidade do LabJogos."
-
+# shared params
 [params]
 favicon = "/images/favicon.ico"
 author = "Laboratório de Jogos"
@@ -324,35 +126,164 @@ authorimage = "/images/logo.svg"
 disable_theme_toggle = false
 disable_stay_uptodate = true
 
+[params.social_media]
+facebook.enabled = true
+facebook.url = "https://www.facebook.com/LabJogosIST"
+
+instagram.enabled = true
+instagram.url = "https://www.instagram.com/labjogos"
+
+youtube.enabled = true
+youtube.url = "https://www.youtube.com/channel/UCMen5hJDFz6hZtE35_tzSMw"
+
+description_en = "The Game Lab at Instituto Superior Técnico (Universidade de Lisboa) is a dedicated space for game design, development, academic research, and student collaboration."
+description_pt = "O Laboratório de Jogos no Instituto Superior Técnico (Universidade de Lisboa) é um espaço dedicado ao design de jogos, desenvolvimento, investigação académica e colaboração de estudantes."
+
+badge_en = "Made with X"
+badge_pt = "Feito com X"
+
+moto_en = ""
+moto_pt = ""
+
+# --- About Section ---
+[params.sections.about]
+heading_en = "About"
+heading_pt = "Sobre"
+
+[[params.sections.about.cards]]
+title_en = "Education"
+title_pt = "Educação"
+text_en = "LabJogos offers multiple courses in the Specialization on Games in Instituto Superior Técnico and holds several Master Thesis and research projects in the fields of Games and Interactive Experiences."
+text_pt = "No que toca a educação, o LabJogos oferece vários cursos na Especialização em Jogos no Instituto Superior Técnico e realiza várias Teses de Mestrado e projectos de investigação nos campos dos Jogos e das Experiências Interactivas."
+button_label_en = "See courses"
+button_label_pt = "Ver cursos"
+button_link = "education"
+image = "/images/about/education.png"
+
+[[params.sections.about.cards]]
+title_en = "Mission"
+title_pt = "Missão"
+text_en = "LabJogos promotes the values of Games, bridging the gap between Academia, Industry, and Society. As a continued mission to help spread knowledge on game development in and out of Instituto Superior Técnico, LabJogos promotes a range of events throughout the year."
+text_pt = "O LabJogos promove os valores dos Jogos, fazendo a ponte entre a Academia, a Indústria e a Sociedade. Como missão contínua de ajudar a difundir o conhecimento sobre o desenvolvimento de jogos dentro e fora do Instituto Superior Técnico, o LabJogos promove uma série de eventos ao longo do ano."
+button_label_en = "See More"
+button_label_pt = "Ver Mais"
+button_link = "mission"
+image = "/images/about/mission.png"
+
+[[params.sections.about.cards]]
+title_en = "Innovation"
+title_pt = "Inovação"
+text_en = "At LabJogos we support innovation in game creation by offering multidisciplinary teams to develop games with the help of Fine Arts students."
+text_pt = "No LabJogos apoiamos a inovação na criação de jogos através da oferta de equipas multidisciplinares para o desenvolvimento dos mesmos com ajuda dos alunos de Belas Artes."
+image = "/images/about/innovation.png"
+
+
+# --- Education Section ---
 [params.sections.education]
+heading_en = "Education"
+heading_pt = "Educação"
 images = [
   "images/education/showcase01.jpg",
   "images/education/showcase02.jpg",
 ]
 
+[[params.sections.education.items]]
+title_en = "Artificial Intelligence in Games"
+title_pt = "Inteligência Artificial para Jogos"
+link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489420"
+
+[[params.sections.education.items]]
+title_en = "Computer Graphics for Games"
+title_pt = "Computação Gráfica para Jogos"
+link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/1127428915200239"
+
+[[params.sections.education.items]]
+title_en = "Game Design"
+title_pt = "Design de Jogos"
+link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489418"
+
+[[params.sections.education.items]]
+title_en = "Autonomous Agents and Multi-Agent Systems"
+title_pt = "Agentes Autónomos e Sistemas Multi-Agente"
+link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489405"
+
+[[params.sections.education.items]]
+title_en = "Game Development Methodology"
+title_pt = "Metodologia de Desenvolvimento de Jogos"
+link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489421"
+
+[[params.sections.education.items]]
+title_en = "Multimedia Content Production"
+title_pt = "Produção de Conteúdos Multimédia"
+link = "https://fenix.tecnico.ulisboa.pt/cursos/meic-t/disciplina-curricular/845953938489399"
+
+
+# --- Games Section Highlights ---
+[[params.sections.games.highlights_after]]
+title_en = "Work in Progress"
+title_pt = "Em construção"
+desc_en = "Tons of games, they will be placed here."
+desc_pt = "Existem muitos jogos, vão ficar aqui."
+placeholder_en = "Game Image"
+placeholder_pt = "Game Image"
+year = "2026"
+image = "/images/wip.svg"
+
+
+# --- Events Section ---
+[[params.sections.events.items]]
+badge = "GGJ"
+title_en = "Global Game Jam"
+title_pt = "Global Game Jam"
+desc_en = "Global Game Jam brings together programmers, artists, musicians, game designers and other video game lovers with the goal of developing a game in 48 hours."
+desc_pt = "A Global Game Jam junta programadores, artistas, músicos, game designers e outros amantes de videojogos com o objectivo de desenvolver um jogo em 48 horas."
+image = "images/events/ggj.jpg"
+link = "/events/ggj/"
+
+[[params.sections.events.items]]
+badge = "Mojo"
+title_en = "Montra de Jogos"
+title_pt = "Montra de Jogos"
+desc_en = "Montra de Jogos (MOJO) is an annual game showcase of what is best produced in the area of games by the IST community."
+desc_pt = "Montra de Jogos (MOJO) é uma exposição anual de jogos do que é melhor produzido na área pela comunidade do IST."
+image = "images/events/mojo.jpg"
+link = "/posts/mojo26.md"
+
+[[params.sections.events.items]]
+badge = "Alumni Meets"
+title_en = "Alumni Meeting"
+title_pt = "Alumni Meeting"
+desc_en = "Annual conferences where past graduates working in premium studios share workflows."
+desc_pt = "Conferências anuais onde ex-alunos que trabalham em estúdios de renome partilham fluxos de trabalho."
+image = "images/events/alumni.jpg"
+link = "/events/global-game-jam/"
+
+[[params.sections.events.items]]
+badge = "Talk N' Play"
+title_en = "Talk N' Play"
+title_pt = "Talk N' Play"
+desc_en = "Talk n' Play is our most frequent event where we invite students to participate in a discussion of anything and everything games related."
+desc_pt = "O Talk n' Play é o nosso evento mais frequente onde convidamos os estudantes a participar numa discussão sobre tudo e qualquer coisa relacionada com jogos."
+image = "images/events/tnp.jpg"
+link = "/events/global-game-jam/"
+
+
+# --- Partners Section ---
 [params.sections.partners]
+heading_en = "Partners"
+heading_pt = "Parceiros"
+text_en = "Throughout the years, LabJogos interacted and collaborated with multiple partners that make the laboratory and its activities possible. Partners offer ideas and motivation to the community of LabJogos."
+text_pt = "Ao longo dos anos o LabJogos interagiu e colaborou com múltiplos parceiros que tornam o laboratório e as suas actividades possíveis. Os parceiros oferecem as suas ideias e motivação à comunidade do LabJogos."
+
 logos = [
   { name = "Instituto Superior Técnico", id = "ist", image = "images/partners/ist.png" },
-  { name = "belas-artes ulisboa", id = "arteslx", image = "images/partners/artes.png" },
+  { name = "belas-artes ulisboa", id = "arteslx", image = "images/partners/artes.png", invert_dark = true },
   { name = "Miniclip", id = "miniclip", image = "images/partners/miniclip.png" },
   { name = "DEI", id = "dei", image = "images/partners/dei.png" },
 ]
 
 [params.sections.connect]
 action = "/contact/"
-
-[params.social_media]
-[params.social_media.facebook]
-enabled = true
-url = "https://www.facebook.com/LabJogosIST"
-
-[params.social_media.instagram]
-enabled = true
-url = "https://instagram.com/labjogos"
-
-# ==========================================
-# MARKUP AND ENGINE PRIVACY SETTINGS
-# ==========================================
 
 [taxonomies]
 category = "Categories"
@@ -380,40 +311,32 @@ rightAngleQuote = "&raquo;"
 rightDoubleQuote = "&rdquo;"
 rightSingleQuote = "&rsquo;"
 
+[markup.goldmark.parser.attribute]
+block = false
+title = true
+
 [markup.goldmark.parser]
 autoHeadingID = true
 autoHeadingIDType = "github"
 wrapStandAloneImageWithinParagraph = true
 
-[markup.goldmark.parser.attribute]
-block = false
-title = true
-
 [markup.goldmark.renderer]
 hardWraps = false
-unsafe = false
+unsafe = true
 xhtml = false
 
 [privacy.disqus]
 disable = true
-
 [privacy.googleAnalytics]
 disable = true
-
 [privacy.instagram]
 disable = true
-
 [privacy.x]
 disable = true
-enableDNT = false
-simple = false
-
 [privacy.vimeo]
 disable = true
-
 [privacy.youtube]
 disable = true
-privacyEnhanced = true
 
 [module.hugoVersion]
 extended = true
