@@ -3,7 +3,7 @@
 <section class="recent-content index-news py-16 border-b border-zinc-200 dark:border-zinc-800">
   <div class="container mx-auto px-4 max-w-7xl">
     <div class="section-title-container">
-      <h2 title="Updates">Updates</h2>
+      <h2 title="{{ T "updates" }}">{{ T "updates" }}</h2>
     </div>
 
     {{ $updates := where .Site.RegularPages "Section" "in" (slice "posts" "blog") }}
@@ -31,7 +31,7 @@
     </div>
     {{ else }}
     <div class="text-center py-8 text-zinc-500 dark:text-zinc-400 text-sm italic">
-      No recent updates found. Add markdown documents inside content/posts/ or content/blog/.
+      {{ T "no_updates" }}
     </div>
     {{ end }}
   </div>
@@ -41,7 +41,7 @@
   <div class="container mx-auto px-4 max-w-7xl">
 
     <div class="section-title-container">
-      <h2 title="About Us">About Us</h2>
+      <h2 title="{{ T "about_us" }}">{{ T "about_us" }}</h2>
     </div>
 
     <div class="text-center max-w-2xl mx-auto mb-20 -mt-4">
@@ -86,8 +86,18 @@
           {{ end }}
 
           <div class="shrink-0">
-            {{ if .link }}
-            <a href="{{ .link }}"
+            {{ $url := "" }}
+            {{ with .link }}
+            {{ $p := site.GetPage . }}
+            {{ if $p }}
+            {{ $url = $p.RelPermalink }}
+            {{ else }}
+            {{ $url = . | relLangURL }}
+            {{ end }}
+            {{ end }}
+
+            {{ if $url }}
+            <a href="{{ $url }}"
               class="text-2xl font-bold tracking-tight text-primary-600 hover:text-primary-500 transition">
               {{ .title }}
             </a>
@@ -106,9 +116,9 @@
 
         {{ if .button }}
         <div class="mt-auto pt-8 shrink-0">
-          <a href="{{ .button.link }}"
+          <a href="{{ .button.link | relLangURL }}"
             class="inline-flex items-center px-6 py-2.5 text-xs font-bold uppercase tracking-wider bg-primary-600 text-white rounded-md hover:bg-primary-500 transition shadow-sm">
-            {{ .button.label | default "See more" }}
+            {{ if eq .button.label "See courses" }}{{ T "see_courses" }}{{ else }}{{ T "see_more" }}{{ end }}
           </a>
         </div>
         {{ end }}
@@ -125,21 +135,25 @@
   <div class="container mx-auto px-4 max-w-7xl">
 
     <div class="section-title-container">
-      <h2 title="Games">Games</h2>
+      <h2 title="{{ T "games" }}">{{ T "games" }}</h2>
     </div>
 
     <div class="flex justify-end mb-4 -mt-4 pr-4">
-      <a href="{{ .Site.Params.sections.games.see_more_url | default " /en/projects/" }}"
-        class="px-4 py-1.5 text-xs font-bold tracking-wider uppercase bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded transition">See
-        More</a>
+      <a href="{{ .Site.Params.sections.games.see_more_url | default "/projects/" | relLangURL }}"
+        class="px-4 py-1.5 text-xs font-bold tracking-wider uppercase bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded transition">
+        {{ T "see_more" }}
+      </a>
     </div>
 
     <div style="position: relative; width: 100%;">
-      
-      <button type="button" onclick="document.getElementById('games-scroller').scrollBy({left: -360, behavior: 'smooth'})"
+
+      <button type="button"
+        onclick="document.getElementById('games-scroller').scrollBy({left: -360, behavior: 'smooth'})"
         class="bg-white hover:bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 shadow-lg transition-colors"
         style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 30; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
       </button>
 
       <div id="games-scroller" class="game-container scroll-smooth"
@@ -163,10 +177,13 @@
 
       </div>
 
-      <button type="button" onclick="document.getElementById('games-scroller').scrollBy({left: 360, behavior: 'smooth'})"
+      <button type="button"
+        onclick="document.getElementById('games-scroller').scrollBy({left: 360, behavior: 'smooth'})"
         class="bg-white hover:bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 shadow-lg transition-colors"
         style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 30; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+        </svg>
       </button>
 
     </div>
@@ -174,48 +191,55 @@
 </section>
 
 <style>
-  #games-scroller::-webkit-scrollbar { display: none; }
+  #games-scroller::-webkit-scrollbar {
+    display: none;
+  }
 </style>
 
 <section class="index-education-courses py-16">
   <div class="container mx-auto px-4 max-w-7xl">
-    
+
     <div class="section-title-container courses-subtitle mb-10 md:mb-16">
-      <h2 title="Our Courses">Our Courses</h2>
+      <h2 title="{{ T "our_courses" }}">{{ T "our_courses" }}</h2>
     </div>
 
     <style>
-      .bulletproof-courses-grid {
+      .courses-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 3rem;
-        align-items: center; 
+        align-items: center;
       }
+
       @media (min-width: 768px) {
-        .bulletproof-courses-grid {
+        .courses-grid {
           grid-template-columns: 1fr 1fr;
         }
       }
     </style>
 
-    <div class="bulletproof-courses-grid">
-      
+    <div class="courses-grid">
+
       <div style="position: relative; width: 100%; max-width: 500px; height: 320px; margin: 0 auto;">
-        <div class="bg-zinc-100 dark:bg-zinc-800 border-4 border-white dark:border-zinc-950 shadow-lg rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
-             style="position: absolute; top: 0; left: 0; width: 70%; height: 70%; z-index: 10;">
-          <img src="{{ index .Site.Params.sections.education.images 0 | relURL }}" alt="Course Feature Back" style="width: 100%; height: 100%; object-fit: cover;">
+        <div
+          class="bg-zinc-100 dark:bg-zinc-800 border-4 border-white dark:border-zinc-950 shadow-lg rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
+          style="position: absolute; top: 0; left: 0; width: 70%; height: 70%; z-index: 10;">
+          <img src="{{ index .Site.Params.sections.education.images 0 | relURL }}" alt="Course Feature Back"
+            style="width: 100%; height: 100%; object-fit: cover;">
         </div>
-        
-        <div class="bg-zinc-200 dark:bg-zinc-800 border-4 border-white dark:border-zinc-950 shadow-2xl rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
-             style="position: absolute; bottom: 0; right: 0; width: 70%; height: 70%; z-index: 20;">
-          <img src="{{ index .Site.Params.sections.education.images 1 | relURL }}" alt="Course Feature Front" style="width: 100%; height: 100%; object-fit: cover;">
+
+        <div
+          class="bg-zinc-200 dark:bg-zinc-800 border-4 border-white dark:border-zinc-950 shadow-2xl rounded-2xl overflow-hidden transition-transform duration-500 hover:scale-[1.02]"
+          style="position: absolute; bottom: 0; right: 0; width: 70%; height: 70%; z-index: 20;">
+          <img src="{{ index .Site.Params.sections.education.images 1 | relURL }}" alt="Course Feature Front"
+            style="width: 100%; height: 100%; object-fit: cover;">
         </div>
       </div>
 
       <div class="courses-sem-group flex flex-col justify-center">
-        
+
         <div class="courses-sem1 mb-8">
-          <h4 class="font-heading text-lg dark:text-white mb-4">1st Semester</h4>
+          <h4 class="font-heading text-lg dark:text-white mb-4">{{ T "first_semester" }}</h4>
           <ul>
             {{ range first 3 .Site.Params.sections.education.items }}
             <li>
@@ -228,7 +252,7 @@
         </div>
 
         <div class="courses-sem2">
-          <h4 class="font-heading text-lg dark:text-white mb-4">2nd Semester</h4>
+          <h4 class="font-heading text-lg dark:text-white mb-4">{{ T "second_semester" }}</h4>
           <ul>
             {{ range last 3 .Site.Params.sections.education.items }}
             <li>
@@ -249,16 +273,16 @@
 <section class="events index-partners py-16 border-t border-zinc-200 dark:border-zinc-800">
   <div class="container mx-auto px-4 max-w-7xl">
     <div class="section-title-container">
-      <h2 title="Events">Events</h2>
+      <h2 title="{{ T "events" }}">{{ T "events" }}</h2>
     </div>
 
-    <div id="custom-events-card-wrapper" class="custom-events-card bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 md:p-8 shadow-sm grid grid-cols-1 md:grid-cols-[240px_1fr] gap-10 items-start overflow-hidden">
-      
-      <div class="flex flex-col gap-1.5 pb-6 md:pb-0 pr-0 md:pr-4 sticky top-4 z-20 border-r border-zinc-100 dark:border-zinc-800/50">
+    <div id="custom-events-card-wrapper"
+      class="custom-events-card bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 md:p-8 shadow-sm grid grid-cols-1 md:grid-cols-[240px_1fr] gap-10 items-start overflow-hidden">
+
+      <div
+        class="flex flex-col gap-1.5 pb-6 md:pb-0 pr-0 md:pr-4 sticky top-4 z-20 border-r border-zinc-100 dark:border-zinc-800/50">
         {{ range $index, $element := .Site.Params.sections.events.items }}
-        <button 
-          type="button"
-          onclick="switchEvent(this, {{ $index }})"
+        <button type="button" onclick="switchEvent(this, {{ $index }})"
           class="event-tab-btn {{ if eq $index 0 }}is-active{{ end }}">
           {{ .badge | default (printf "Event %d" (add $index 1)) }}
         </button>
@@ -267,24 +291,25 @@
 
       <div class="grid grid-cols-1 items-start w-full min-w-0" style="display: grid !important;">
         {{ range $index, $element := .Site.Params.sections.events.items }}
-        
-        <div 
-          id="event-content-{{ $index }}" 
+
+        <div id="event-content-{{ $index }}"
           class="event-content-pane w-full grid grid-cols-1 md:grid-cols-[340px_1fr] gap-6 md:gap-10 min-w-0"
           style="grid-area: 1 / 1 / 2 / 2; 
                  opacity: {{ if eq $index 0 }}1{{ else }}0{{ end }}; 
                  transform: translateY({{ if eq $index 0 }}0px{{ else }}12px{{ end }}); 
                  pointer-events: {{ if eq $index 0 }}auto{{ else }}none{{ end }}; 
                  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
-          
+
           {{ if .image }}
-          <div class="w-full aspect-video md:aspect-auto md:w-full md:h-52 bg-zinc-100 dark:bg-zinc-800/40 overflow-hidden rounded-xl shrink-0">
+          <div
+            class="w-full aspect-video md:aspect-auto md:w-full md:h-52 bg-zinc-100 dark:bg-zinc-800/40 overflow-hidden rounded-xl shrink-0">
             <img src="{{ .image | relURL }}" alt="{{ .title }}" class="w-full h-full object-cover block">
           </div>
           {{ end }}
-          
+
           <div class="min-w-0 flex-1 relative pb-12 self-start">
-            <h3 class="font-heading font-bold text-3xl md:text-4xl leading-tight tracking-tight text-zinc-900 dark:text-white max-w-xl md:max-w-[85%]">
+            <h3
+              class="font-heading font-bold text-3xl md:text-4xl leading-tight tracking-tight text-zinc-900 dark:text-white max-w-xl md:max-w-[85%]">
               {{ .title }}
             </h3>
             <p class="text-sm md:text-base mt-4 leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-xl">
@@ -292,10 +317,11 @@
             </p>
 
             {{ if .link }}
-            <a href="{{ .link | relURL }}" 
-               class="group/arrow absolute bottom-0 right-0 w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-all shadow-sm"
-               title="Learn more about {{ .title }}">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transition-transform group-hover/arrow:translate-x-0.5">
+            <a href="{{ .link | relLangURL }}"
+              class="group/arrow absolute bottom-0 right-0 w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:bg-primary-600 hover:text-white transition-all shadow-sm"
+              title="Learn more about {{ .title }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                stroke="currentColor" class="w-4 h-4 transition-transform group-hover/arrow:translate-x-0.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7 7M21 12H3" />
               </svg>
             </a>
@@ -333,7 +359,10 @@
 <section class="partners index-partners py-16 border-t border-zinc-200 dark:border-zinc-800">
   <div class="container mx-auto px-4 max-w-7xl">
     <div class="section-title-container">
-      <h2 title="Partners">Partners</h2>
+      <h2 title="{{ T "partners" }}">{{ T "partners" }}</h2>
+    </div>
+    <div class="text-center">
+      <p>{{.Site.Params.sections.partners.text}}</p>
     </div>
     <div
       class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-75 dark:opacity-90">
@@ -376,7 +405,7 @@
   class="item-a group relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col"
   style="display: inline-flex !important; width: 340px !important; height: 420px !important; margin-right: 1.5rem !important; vertical-align: top !important; whitespace: normal !important; float: none !important;">
 
-  <a href="{{ $link | default " #" }}" class="flex flex-col justify-between h-full p-4">
+  <a href="{{ $link | default "#" }}" class="flex flex-col justify-between h-full p-4">
 
     <div>
       <div
@@ -416,8 +445,9 @@
       class="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/80 mt-auto shrink-0 w-full">
       <span
         class="text-[11px] font-bold tracking-widest uppercase text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-colors">
-        {{ if $link }}View Details{{ else }}Prototype Stage{{ end }}
+        {{ if $link }}{{ T "view_details" }}{{ end }}
       </span>
+      {{ if $link }}
       <div
         class="more-arrow-box w-6 h-6 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 group-hover:bg-primary-600 group-hover:text-white transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
@@ -425,7 +455,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7 7M21 12H3" />
         </svg>
       </div>
-    </div>
+    </div>{{ end }}
 
   </a>
 

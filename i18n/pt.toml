@@ -1,0 +1,35 @@
+[updates]
+other = "Notícias"
+
+[no_updates]
+other = "Nenhuma post encontrado."
+
+[about_us]
+other = "Sobre"
+
+[see_courses]
+other = "Ver cursos"
+
+[see_more]
+other = "Ver mais"
+
+[games]
+other = "Jogos"
+
+[our_courses]
+other = "Disciplinas"
+
+[first_semester]
+other = "1º Semestre"
+
+[second_semester]
+other = "2º Semestre"
+
+[events]
+other = "Eventos"
+
+[partners]
+other = "Parceiros"
+
+[view_details]
+other = "Ver Detalhes"

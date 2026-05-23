@@ -1,2 +1,38 @@
 [wordCount]
 other = "{{ .WordCount }} words"
+
+[updates]
+other = "Updates"
+
+[no_updates]
+other = "No recent updates found. Add markdown documents inside content/posts/ or content/blog/."
+
+[about_us]
+other = "About Us"
+
+[see_courses]
+other = "See courses"
+
+[see_more]
+other = "See More"
+
+[games]
+other = "Games"
+
+[our_courses]
+other = "Our Courses"
+
+[first_semester]
+other = "1st Semester"
+
+[second_semester]
+other = "2nd Semester"
+
+[events]
+other = "Events"
+
+[partners]
+other = "Partners"
+
+[view_details]
+other = "View Details"
