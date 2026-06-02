@@ -3,9 +3,13 @@
 
 setup/install:
 - hugo 
-- pnpm
+- npm / pnpm
 
 # Editing Notes:
 - Create new content with the command "hugo new content <SECTIONNAME>/<FILENAME>.<FORMAT>".
+- content needs to be in content/en and content/pt
 
-- to edit, run `pnpm run dev:watch`
+- setup with `npm install`
+- to edit/preview, run `npm run dev:watch`
+
+- to deploy run `hugo build` and copy the public folder/ to wherever
