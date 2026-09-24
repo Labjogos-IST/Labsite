@@ -44,11 +44,11 @@ weight = 10
 
 [[languages.en.menu.main]]
 name = "Games"
-url = "/games"
+url = "/projects"
 weight = 20
 [[languages.pt.menu.main]]
 name = "Jogos"
-url = "/games"
+url = "/projects"
 weight = 20
 
 [[languages.en.menu.main]]
